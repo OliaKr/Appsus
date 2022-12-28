@@ -1,6 +1,4 @@
 export function NoteTodos({note}) {
     console.log(note);
-
-    return <div>note tods</div>
-
+    return <section className="note note-todos">NoteTodos</section>
 }

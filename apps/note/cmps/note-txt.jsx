@@ -1,5 +1,6 @@
 export function NoteTxt({note}) {
-    console.log(note);
-    return <div>note txt</div>
+    const {info,style} = note
+
+    return <section className="note note-txt">{info.txt}</section>
 
 }

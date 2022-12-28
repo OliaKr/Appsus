@@ -17,7 +17,6 @@ export function NotePreview({ note }) {
         case 'note-todos':
             return <NoteTodos note={note}/>
     }
-    return <div>note preview</div>
-
+    // return <div>note preview</div>
 }
 
