@@ -1,0 +1,10 @@
+.add-note{
+    max-width: 600px;
+    /* min-height: 50px; */
+    margin: 0 auto 2em;
+    padding: .75em 1em;
+
+    box-shadow: 0 3px 5px rgb(0 0 0 / 20%);
+    
+}
+

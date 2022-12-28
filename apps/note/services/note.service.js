@@ -51,7 +51,8 @@ function _createNotes() {
                 isPinned: true,
                 info: {
                     txt: "Fullstack Me Baby!"
-                }
+                },
+                style:{},
             }, {
                 id: "n103",
                 type: "note-todos",
@@ -60,7 +61,8 @@ function _createNotes() {
                     todos: [
                         { txt: "Driving liscence", doneAt: null },
                         { txt: "Coding power", doneAt: 187111111 }]
-                }
+                },
+                style:{},
             }, {
                 id: "n102",
                 type: "note-img",

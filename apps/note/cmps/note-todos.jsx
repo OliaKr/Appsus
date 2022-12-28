@@ -1,4 +1,4 @@
-export function NoteTodos({note}) {
+export function NoteTodos({note, className}) {
     console.log(note);
-    return <section className="note note-todos">NoteTodos</section>
+    return <section className={`note note-todos ${className}`}>NoteTodos</section>
 }

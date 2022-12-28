@@ -2,7 +2,7 @@
     border-radius: .5em;
     border: solid 1px var(--border-color);
     min-height: 100px;
-    max-width: 200px;
+    width: 200px;
 
     padding: .75em 1em;
 

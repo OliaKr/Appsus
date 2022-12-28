@@ -21,3 +21,9 @@
 .grid {
     display: grid;
 }
+
+
+/* NOTE  */
+.no-border{
+    border: none;
+}
