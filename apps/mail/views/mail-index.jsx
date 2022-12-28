@@ -1,5 +1,19 @@
+import { MailList } from "../cmps/mail-list"
+
+const {useState} = React
+
+
 
 export function MailIndex() {
-    return <div>mail app</div>
+
+    const [emails, setEmails] = useState([])
+    return <section className ="mail-index">
+        <div className="full main-layout">
+
+           
+        </div>
+
+        Hello from main index!
+    </section>
 }
 
