@@ -9,14 +9,18 @@ export function NoteIndex() {
     const [notes,setNotes] = useState([])
 
     useEffect(()=>{
+        loadNotes()
+    },[])
+
+    function loadNotes(){
         noteService.query()
         .then(notes=>{
             setNotes(notes)
         })
-    },[])
+    }
 
     return <section className="note-index">
-        <AddNote />
+        <AddNote setNotes={setNotes} />
         <NoteList notes={notes}/>
     </section>
 

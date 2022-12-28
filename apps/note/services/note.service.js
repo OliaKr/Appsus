@@ -11,9 +11,23 @@ export const noteService = {
     get,
     post,
     remove,
+    getEmptyNote,
 
 }
 
+function getEmptyNote(){
+    return {
+        id: utilService.makeId(),
+                type: "note-txt",
+                isPinned: false,
+                // createdAt: Date.now(),
+                info: {
+                    txt: '',
+                    title:''
+                },
+                style:{},
+    }
+}
 
 function query() {
     return storageService.query(NOTE_KEY)
@@ -36,8 +50,7 @@ function remove(noteId) {
     return storageService.remove(NOTE_KEY, noteId)
 }
 
-function post() {
-    // const note = _createnote(title, amount)
+function post(note) {
     return storageService.post(NOTE_KEY, note)
 }
 
