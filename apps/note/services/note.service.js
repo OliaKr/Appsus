@@ -11,9 +11,23 @@ export const noteService = {
     get,
     post,
     remove,
+    getEmptyNote,
 
 }
 
+function getEmptyNote(){
+    return {
+        id: utilService.makeId(),
+                type: "note-txt",
+                isPinned: false,
+                // createdAt: Date.now(),
+                info: {
+                    txt: '',
+                    title:''
+                },
+                style:{},
+    }
+}
 
 function query() {
     return storageService.query(NOTE_KEY)
@@ -36,8 +50,7 @@ function remove(noteId) {
     return storageService.remove(NOTE_KEY, noteId)
 }
 
-function post() {
-    // const note = _createnote(title, amount)
+function post(note) {
     return storageService.post(NOTE_KEY, note)
 }
 
@@ -51,7 +64,8 @@ function _createNotes() {
                 isPinned: true,
                 info: {
                     txt: "Fullstack Me Baby!"
-                }
+                },
+                style:{},
             }, {
                 id: "n103",
                 type: "note-todos",
@@ -60,12 +74,13 @@ function _createNotes() {
                     todos: [
                         { txt: "Driving liscence", doneAt: null },
                         { txt: "Coding power", doneAt: 187111111 }]
-                }
+                },
+                style:{},
             }, {
                 id: "n102",
                 type: "note-img",
                 info: {
-                    url: "http://some-img/me",
+                    url: "https://www.w3schools.com/images/w3schools_green.jpg",
                     title: "Bobi and Me"
                 },
                 style: {

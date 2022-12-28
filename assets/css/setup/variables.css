@@ -1,4 +1,8 @@
 :root {
     --main-bg-color: lightblue;
     --secondry-bg-color: rgb(188, 19, 19);
+
+    /* NOTE  */
+    --border-color: #cac8c8; /* #e0e0e0 */
+    --txt-color: #202124;
 }

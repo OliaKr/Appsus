@@ -1,6 +1,5 @@
-export function NoteVideo({note}) {
+export function NoteVideo({note,className}) {
     console.log(note);
-
-    return <div>note video</div>
+    return <section className={`note note-video ${className}`}>NoteVideo</section>
 
 }

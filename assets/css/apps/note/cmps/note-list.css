@@ -1,0 +1,8 @@
+.note-list{
+    column-count: 4;
+    column-gap: 10px;
+}
+
+.note-list >.note {
+    display: inline-block;
+}

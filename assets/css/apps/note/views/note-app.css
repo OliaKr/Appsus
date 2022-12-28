@@ -1,0 +1,10 @@
+.note-index {
+    margin: 0 auto;
+    width: 90vw;
+    /* margin: 0 2em; */
+}
+
+.note-index>* {
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    color: var(--txt-color);
+}
