@@ -1,8 +1,10 @@
-export function NoteImg({ note, className }) {
-    const { info, style } = note
-    return <section className={`note note-img ${className}`} style={{ backgroundColor: style.backgroundColor }}>
-        <img src={info.url} alt="" />
+import { NoteTitle } from "./note-title.jsx"
+
+export function NoteImg({ info }) {
+    const { title,url } = info
+    return <section className="note-img">
+        <img src={url} alt="" />
         {/* <div className="img-contaier"><img src={info.url} alt="" /></div> */}
-        <h3>{info.title}</h3>
+        {title && <NoteTitle title={title}/>}
     </section>
 }

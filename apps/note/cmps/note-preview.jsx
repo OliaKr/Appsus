@@ -1,23 +1,26 @@
-import { NoteTxt } from "./note-txt.jsx"
-import { NoteImg } from "./note-img.jsx"
-import { NoteVideo } from "./note-video.jsx"
-import { NoteTodos } from "./note-todos.jsx"
+import { noteService } from "../services/note.service.js"
+import { DynamicNote } from "./dynamic-note.jsx"
 
-export function NotePreview({ note }) {
-    const className = note.style.backgroundColor ? 'no-border' : ''
-    switch (note.type) {
-        case 'note-txt':
-            return <NoteTxt note={note} className={className}/>
+export function NotePreview({ note,setNotes }) {
 
-        case 'note-img':
-            return <NoteImg note={note} className={className}/>
+    function onDeleteNote(ev,noteId){
+        ev.stopPropagation()
+        noteService.remove(noteId)
+        .then(console.log)
+        setNotes(prevNotes=> prevNotes.filter(note=>note.id !== noteId))
 
-        case 'note-video':
-            return <NoteVideo note={note} className={className}/>
-
-        case 'note-todos':
-            return <NoteTodos note={note} className={className}/>
     }
-    // return <div>note preview</div>
+
+    function onUpdateNote(){
+        console.log('update');
+    }
+
+
+    return <section className="note-preview"
+    onClick={onUpdateNote}>
+        <DynamicNote type={note.type} info={note.info}
+            onChangeInfo={info => onChangeInfo(note.id, info)} />
+          <button onClick={(ev)=>onDeleteNote(ev,note.id)}><i class="fa-solid fa-trash-can"></i></button>  
+    </section>
 }
 
