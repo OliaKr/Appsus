@@ -1,6 +1,8 @@
 .note-index {
     margin: 0 auto;
-    width: 90vw;
+    width: 95vw;
+    height: fit-content;
+    /* height: auto; */
     /* margin: 0 2em; */
 }
 
@@ -8,3 +10,4 @@
     font-family: "Google Sans", Roboto, Arial, sans-serif;
     color: var(--txt-color);
 }
+

@@ -3,6 +3,7 @@
     /* min-height: 50px; */
     margin: 0 auto 2em;
     padding: .75em 1em;
+    border-radius: .75em;
 
     box-shadow: 0 3px 5px rgb(0 0 0 / 20%);
 
@@ -13,7 +14,10 @@
     width: 100%;
 }
 
+/* .add-note textarea{
+    resize: none;
+} */
+
 .add-note :focus-visible {
     outline: none;
-
 }

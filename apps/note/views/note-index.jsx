@@ -1,27 +1,33 @@
 const { useState, useEffect } = React
+const { useNavigate, useParams, Link } = ReactRouterDOM
+
 
 import { AddNote } from "../cmps/add-note.jsx"
 import { NoteList } from "../cmps/note-list.jsx"
+import { NoteEdit } from "../cmps/note.edit.jsx"
 
 import { noteService } from "../services/note.service.js"
 
 export function NoteIndex() {
-    const [notes,setNotes] = useState([])
+    const [notes, setNotes] = useState([])
+    const { noteId } = useParams()
+    console.log(noteId)
 
-    useEffect(()=>{
+    useEffect(() => {
         loadNotes()
-    },[])
+    }, [])
 
-    function loadNotes(){
+    function loadNotes() {
         noteService.query()
-        .then(notes=>{
-            setNotes(notes)
-        })
+            .then(notes => {
+                setNotes(notes)
+            })
     }
 
     return <section className="note-index">
         <AddNote setNotes={setNotes} />
-        <NoteList notes={notes}/>
+        <NoteList notes={notes} setNotes={setNotes} />
+        {noteId && <NoteEdit loadNotes={loadNotes} noteId={noteId} />}
     </section>
 
 }

@@ -1,9 +1,9 @@
 import { NotePreview } from "./note-preview.jsx"
 
-export function NoteList({ notes }) {
-    console.log(notes)
+export function NoteList({ notes,setNotes }) {
+    console.log('notes',notes)
     return <section className="note-list">
-        {notes.map(note => <NotePreview note={note} key={note.id} />)}
+        {notes.map(note => <NotePreview note={note} setNotes={setNotes} key={note.id} />)}
     </section>
 
 }

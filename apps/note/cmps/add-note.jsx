@@ -4,13 +4,13 @@ import { noteService } from "../services/note.service.js"
 const { useState, useEffect } = React
 
 
-export function AddNote({setNotes}) {
+export function AddNote({ setNotes }) {
     const [isExpanded, setIsExpanded] = useState(false)
     const [newNote, setNewNote] = useState(null)
 
 
     function onInputClick() {
-        if(!newNote) setNewNote(noteService.getEmptyNote())
+        if (!newNote) setNewNote(noteService.getEmptyNote())
         setIsExpanded(true)
     }
 
@@ -21,17 +21,20 @@ export function AddNote({setNotes}) {
             return { ...prevNote, info: newInfo }
         })
     }
-    function onCloseNote() {
+    function onCloseNote(ev) {
+        console.log(ev.relatedTarget);
+        if(ev.relatedTarget) return
         if (newNote.info.txt) {
-            noteService.post(newNote).then(note=>{
-                setNotes(prevNotes=> [...prevNotes,note])
+            noteService.post(newNote).then(note => {
+                setNotes(prevNotes => [...prevNotes, note])
             })
         }
         setIsExpanded(false)
         setNewNote(null)
     }
 
-    return <section className="add-note">
+    return <section className="add-note"
+        onBlur={onCloseNote}>
         {isExpanded && <input className="no-border"
             type="text"
             name="title"
@@ -50,4 +53,3 @@ export function AddNote({setNotes}) {
     </section>
 }
 
-``

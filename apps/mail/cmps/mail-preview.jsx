@@ -39,6 +39,8 @@ export function Mailpreview({email, togglePreview}) {
                 className='mail-preview-open flex-column'
                 onClick={togglePreview}
               >
+
+                
                 <h1 className='subject-preview-open'>{email.subject}</h1>
                 <div className='from-preview-open flex'>
                   <h2>{email.from}</h2> <h3>{email.to}</h3>

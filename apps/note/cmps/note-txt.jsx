@@ -1,6 +1,10 @@
-export function NoteTxt({note,className}) {
-    const {info,style} = note
+import { NoteTitle } from "./note-title.jsx"
 
-    return <section className={`note note-txt ${className}`}>{info.txt}</section>
+export function NoteTxt({info}) {
+    const {title,txt} = info
+
+    return <section className="note-txt" >
+        {title && <NoteTitle title={title}/>}
+        {txt}</section>
 
 }

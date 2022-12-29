@@ -1,8 +1,15 @@
-.note-list{
-    column-count: 4;
-    column-gap: 10px;
+.note-list {
+    /* column-count: 3;
+    column-gap: auto; */
+
+    column-width: 240px;
+    /* column-gap: 1em; */
+
+
+
+
 }
 
-.note-list >.note {
+.note-list>.note {
     display: inline-block;
 }
