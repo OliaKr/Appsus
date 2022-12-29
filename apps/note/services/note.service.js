@@ -26,22 +26,24 @@ function getEmptyNote() {
             txt: '',
             title: ''
         },
-        style: {},
+        style: {
+            backgroundColor: 'white'
+        },
     }
 }
 
-function getColors(){
+function getColors() {
     return [
-        '#fbbc04',
-        '#f28b82',
-        '#fff475',
-        '#ccff90',
-        '#a7ffeb',
-        '#cbf0f8',
-        '#aecbfa',
-        '#fdcfe8',
-        '#e6c9a8',
         '#e8eaed',
+        '#e6c9a8',
+        '#fdcfe8',
+        '#aecbfa',
+        '#cbf0f8',
+        '#a7ffeb',
+        '#ccff90',
+        '#fff475',
+        '#f28b82',
+        '#fbbc04',
     ]
 }
 
@@ -83,7 +85,9 @@ function _createNotes() {
                     txt: "Fullstack Me Baby!",
                     title: ''
                 },
-                style: {},
+                style: {
+                    backgroundColor: 'white',
+                },
             }, {
                 id: "n103",
                 type: "note-todos",
@@ -93,7 +97,9 @@ function _createNotes() {
                         { txt: "Driving liscence", doneAt: null },
                         { txt: "Coding power", doneAt: 187111111 }]
                 },
-                style: {},
+                style: {
+                    backgroundColor: 'white',
+                },
             }, {
                 id: "n102",
                 type: "note-img",

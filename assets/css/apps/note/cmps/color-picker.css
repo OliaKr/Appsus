@@ -3,8 +3,10 @@
     display: flex;
     position: absolute;
     background-color: white;
+    padding: .5em 1em;
+    border-radius: .5em;
 
-    box-shadow: 0 0 0 black;
+    box-shadow: 0px 2px 6px 2px rgb(0 0 0 / 22%);
 }
 
 .color-picker .color-btn {
@@ -16,5 +18,13 @@
 }
 
 .color-picker .color-btn:hover {
-    border: 1px solid black;
+    border: 2px solid black;
+}
+
+.color-btn.curr-color{
+    border: 2px solid #a142f4;
+}
+
+.color-btn.curr-color:hover{
+    border: 2px solid #a142f4;
 }

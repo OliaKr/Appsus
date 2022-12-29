@@ -27,7 +27,7 @@ export function NoteIndex() {
 
     return <section className="note-index">
         <AddNote setNotes={setNotes} />
-        <NoteList notes={notes} setNotes={setNotes} />
+        <NoteList notes={notes} setNotes={setNotes} loadNotes={loadNotes}/>
         {noteId && <NoteEdit loadNotes={loadNotes} noteId={noteId} />}
         {noteId && <Screen />}
     </section>

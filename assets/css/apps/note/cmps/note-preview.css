@@ -35,6 +35,6 @@
 }
 
 .note-preview .btns-container>button {
-    background-color: white;
+    background-color: inherit;
     border: none;
 }
