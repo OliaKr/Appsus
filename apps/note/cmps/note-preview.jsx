@@ -1,13 +1,12 @@
 const { useState, useEffect, useRef } = React
 const { useNavigate, useParams, Link } = ReactRouterDOM
 
-import { noteService } from "../services/note.service.js"
+// import { noteService } from "../services/note.service.js"
 import { ColorPicker } from "./color-picker.jsx"
 import { DynamicNote } from "./dynamic-note.jsx"
 
 export function NotePreview({ note ,onUpdateNote,onDeleteNote,changeColor}) {
     const [isPikerOpen, setIsPikerOpen] = useState(false)
-    // const navigate = useNavigate()
 
     function onToggleColorPicker(ev) {
         console.log(ev)

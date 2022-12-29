@@ -1,12 +1,14 @@
-import { noteService } from "../services/note.service.js"
+const { useNavigate, useParams, Link } = ReactRouterDOM
+
 import { NotePreview } from "./note-preview.jsx"
 
+import { noteService } from "../services/note.service.js"
+
 export function NoteList({ notes,setNotes }) {
-    console.log('notes',notes)
+    const navigate = useNavigate()
 
     function onUpdateNote(noteId) {
         navigate(`/note/${noteId}`)
-        console.log('update')
     }
     function onDeleteNote(ev, noteId) {
         ev.stopPropagation()
@@ -30,7 +32,7 @@ export function NoteList({ notes,setNotes }) {
         {notes.map(note => <NotePreview 
         note={note} 
         onDeleteNote={onDeleteNote}
-        onUpdateNot={onUpdateNote}
+        onUpdateNote={onUpdateNote}
         changeColor={changeColor}
         key={note.id} />)}
     </section>

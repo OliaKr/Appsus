@@ -3,7 +3,7 @@
 }
 
 .note-todos .todos-list{
-
+    list-style-type: square;
 }
 
 .todos-list .done {

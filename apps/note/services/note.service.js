@@ -104,7 +104,7 @@ function _createNotes() {
                 id: "n102",
                 type: "note-img",
                 info: {
-                    url: "../../assets/img/audi.jpg",
+                    url: "assets/img/audi.jpg",
                     // url: "https://www.w3schools.com/images/w3schools_green.jpg",
                     title: "Bobi and Me"
                 },
