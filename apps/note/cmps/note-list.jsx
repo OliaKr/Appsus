@@ -1,7 +1,7 @@
 import { noteService } from "../services/note.service.js"
 import { NotePreview } from "./note-preview.jsx"
 
-export function NoteList({ notes,setNotes,loadNotes }) {
+export function NoteList({ notes,setNotes }) {
     console.log('notes',notes)
 
     function onUpdateNote(noteId) {

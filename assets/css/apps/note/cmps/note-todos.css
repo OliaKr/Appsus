@@ -1,0 +1,11 @@
+.note-todos ul{
+
+}
+
+.note-todos .todos-list{
+
+}
+
+.todos-list .done {
+    text-decoration: line-through;
+}
