@@ -20,3 +20,17 @@
 .note-edit :focus-visible {
     outline: none;
 }
+
+.note-edit .btns-container {
+    display: inline;
+}
+.note-edit button {
+    background-color: inherit;
+    border: none;
+    font-size: 1.25em;
+}
+
+.note-edit .close-btn:hover {
+    background-color: #00000010;
+    border-radius: 5px;
+}

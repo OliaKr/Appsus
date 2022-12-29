@@ -106,7 +106,8 @@ function _createNotes() {
                 info: {
                     url: "assets/img/audi.jpg",
                     // url: "https://www.w3schools.com/images/w3schools_green.jpg",
-                    title: "Bobi and Me"
+                    title: "Bobi and Me",
+                    txt: "",
                 },
                 style: {
                     backgroundColor: "#00d"

@@ -4,6 +4,7 @@ const { useNavigate, useParams, Link } = ReactRouterDOM
 import { DynamicEdit } from "./dynamic-edit.jsx"
 
 import { noteService } from "../services/note.service.js"
+import { OptionBar } from "./option-bar.jsx"
 
 export function NoteEdit({ notes, setNotes, noteId }) {
     const [noteToEdit, setNoteToEdit] = useState(null)
@@ -22,6 +23,17 @@ export function NoteEdit({ notes, setNotes, noteId }) {
             return { ...prevNote, info: newInfo }
         })
     }
+
+    function handelCheckBoxChange({ target }) {
+        let { checked } = target
+        console.log('checked',checked);
+        const doneAt = checked ? Date.now() : null
+        setNoteToEdit(prevNote => {
+            const newInfo = { ...prevNote.info, doneAt }
+            return { ...prevNote, info: newInfo }
+        })
+    }
+
     function onCloseEdit(ev) {
         console.log(ev.relatedTarget)
         if (ev.relatedTarget) return
@@ -38,11 +50,16 @@ export function NoteEdit({ notes, setNotes, noteId }) {
     if (!noteToEdit) return
     console.log(noteToEdit.info)
     return <section className="note-edit"
+        style={{ backgroundColor: noteToEdit.style.backgroundColor }}
         onBlur={onCloseEdit}
     >
-        <DynamicEdit note={noteToEdit}
+        <DynamicEdit
+            note={noteToEdit}
             handleChange={handelChange}
-            onCloseEdit={onCloseEdit} />
+            handelCheckBoxChange={handelCheckBoxChange} />
+        <OptionBar />
+        <button onClick={onCloseEdit}
+            className="close-btn">Close</button>
     </section>
 
 }

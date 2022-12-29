@@ -1,6 +1,6 @@
 
 
-export function NoteTxtEdit({ note, handleChange, onCloseEdit }) {
+export function NoteTxtEdit({ note, handleChange }) {
 
     return <section className="note-txt-edit">
         <input className="no-border"
@@ -14,6 +14,5 @@ export function NoteTxtEdit({ note, handleChange, onCloseEdit }) {
             placeholder="Take a note..."
             value={note.info.txt}
             onChange={handleChange} />
-        <button onClick={onCloseEdit}>Close</button>
     </section>
 }

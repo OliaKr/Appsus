@@ -11,3 +11,7 @@
     color: var(--txt-color);
 }
 
+.note-index input,
+.note-index textarea{
+    background-color: inherit;
+}
