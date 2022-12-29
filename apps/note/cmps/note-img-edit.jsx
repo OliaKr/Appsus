@@ -1,2 +1,5 @@
 
-export function NoteImgEdit() {}
+export function NoteImgEdit() {
+
+    return <section>NoteImgEdit</section>
+}

@@ -1,2 +1,5 @@
 
-export function NoteVideoEdit() {}
+export function NoteVideoEdit() {
+
+    return <section>NoteVideoEdit</section>
+}

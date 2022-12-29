@@ -4,19 +4,19 @@ import { NoteTxtEdit } from "./note-txt-edit.jsx"
 import { NoteVideoEdit } from "./note-video-edit.jsx"
 
 
-export function DynamicEdit() {
+export function DynamicEdit({ note, handleChange, onCloseEdit }) {
 
-    switch (type) {
+    switch (note.type) {
         case 'note-txt':
-            return <NoteTxtEdit info={info} />
+            return <NoteTxtEdit note={note} handleChange={handleChange} onCloseEdit={onCloseEdit} />
 
         case 'note-img':
-            return <NoteImgEdit info={info} />
+            return <NoteImgEdit note={note} handleChange={handleChange} onCloseEdit={onCloseEdit} />
 
         case 'note-video':
-            return <NoteVideoEdit info={info} />
+            return <NoteVideoEdit note={note} handleChange={handleChange} onCloseEdit={onCloseEdit} />
 
         case 'note-todos':
-            return <NoteTodosEdit info={info} />
+            return <NoteTodosEdit note={note} handleChange={handleChange} onCloseEdit={onCloseEdit} />
     }
 }
