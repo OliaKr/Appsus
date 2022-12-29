@@ -9,6 +9,7 @@ export const mailService = {
     get,
     save,
     remove,
+    getDefaultFilter,
 
 
 
@@ -233,6 +234,10 @@ function get(emailId) {
 function remove(emailId) {
   return storageService.remove(MAIL_KEY, emailId)
   
+}
+
+function getDefaultFilter() {
+  return { txt: 'kim'}
 }
 
 
