@@ -2,6 +2,7 @@ const { useState, useEffect } = React
 
 import { MailList } from "../cmps/mail-list.jsx"
 import { mailService } from '../services/mail.service.js'
+import { MailHeader } from "../cmps/mail-header.jsx"
 
 
 
@@ -22,13 +23,19 @@ export function MailIndex() {
     }
 
     console.log('emails are emails', emails);
-    return <div className="mail-index">
+    return <div className="mail-index flex">
 
-        <h1>Hello from main index!</h1>
+        {/* <h1>Hello from main index!</h1> */}
 
-        {JSON.stringify(emails)}
+        <MailHeader/>
+        
+        
 
-        < MailList emails={emails}/>
+
+        < MailList emails={emails}
+      
+        />
+
 
     </div>
 }
