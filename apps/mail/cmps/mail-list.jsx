@@ -1,7 +1,7 @@
 import { mailService } from "../services/mail.service.js"
 import { Mailpreview } from "./mail-preview.jsx";
 
-export function MailList({emails}) {
+export function MailList({emails, togglePreview, onMoveToTrash}) {
 
     function togglePreview(emailId) {
         emails.map(email => {
@@ -23,7 +23,8 @@ export function MailList({emails}) {
               <Mailpreview
                 key={email.id}
                 email={email}
-                togglePreview={() => togglePreview(email.id)}
+                togglePreview={() => togglePreview(email.id, email.id)}
+                onMoveToTrash={() => onMoveToTrash(emails, email.id)}
                 
               />
             );
