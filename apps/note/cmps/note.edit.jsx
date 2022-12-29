@@ -3,9 +3,10 @@ const { useNavigate, useParams, Link } = ReactRouterDOM
 
 import { noteService } from "../services/note.service.js"
 
-export function NoteEdit() {
+export function NoteEdit({loadNotes,noteId}) {
     const [noteToEdit, setNoteToEdit] = useState(null)
-    const { noteId } = useParams()
+    const navigate = useNavigate()
+
 
     useEffect(() => {
         noteService.get(noteId)
@@ -19,19 +20,19 @@ export function NoteEdit() {
             return { ...prevNote, info: newInfo }
         })
     }
-    function onCloseNote(ev) {
-        console.log(ev.relatedTarget);
-        if(ev.relatedTarget) return
-        if (newNote.info.txt) {
-            noteService.post(newNote).then(note => {
-                // setNotes(prevNotes => [...prevNotes, note])
-            })
+    function onCloseEdit(ev) {
+        console.log(ev.relatedTarget)
+        if (ev.relatedTarget) return
+        if (noteToEdit.info.txt) {
+            noteService.save(noteToEdit).then(loadNotes)
         }
-        setNoteToEdit(null)
+        navigate('/note')
     }
 
+    
     if (!noteToEdit) return
-    return <section className="note-edit" onBlur={onCloseNote}>
+    console.log(noteToEdit.info);
+    return <section className="note-edit" onBlur={onCloseEdit}>
         <input className="no-border"
             type="text"
             name="title"
@@ -41,9 +42,9 @@ export function NoteEdit() {
         <textarea className="no-border"
             name="txt"
             placeholder="Take a note..."
-            value={noteToEdit ? noteToEdit.info.txt : ''}
+            value={noteToEdit.info.txt}
             onChange={handelChange} />
-        <button onClick={onCloseNote}>Close</button>
+        <button onClick={onCloseEdit}>Close</button>
 
     </section>
 

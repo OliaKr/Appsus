@@ -14,11 +14,10 @@
     width: 100%;
 }
 
-.add-note textarea{
+/* .add-note textarea{
     resize: none;
-}
+} */
 
 .add-note :focus-visible {
     outline: none;
-
 }
