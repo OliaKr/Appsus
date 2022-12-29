@@ -17,7 +17,7 @@ export function Mailpreview({email, togglePreview, onMoveToTrash}) {
     // </div>
 
     return (
-        <Link className='clean-link' to={'/mail'}>
+        <Link className='clean-link' to={'/mail/'}>
           <div>
             {!email.isOpen ? (
               <div
@@ -30,14 +30,14 @@ export function Mailpreview({email, togglePreview, onMoveToTrash}) {
                 <div className='from-preview'>{email.from}</div>
                 <div className='subject-preview'>{email.subject}</div>
                 <div className='text-preview'>{email.body}</div>
-                <button className='delete' onClick={onMoveToTrash}>
+                <button className='delete' onClick={() => onMoveToTrash(email.id)}>
                   move to trash
                 </button>
               </div>
             ) : (
               <div
                 className='mail-preview-open flex-column'
-                onClick={togglePreview}
+                onClick={() => togglePreview(email.id)}
               >
 
 

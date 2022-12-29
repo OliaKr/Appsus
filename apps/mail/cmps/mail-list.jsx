@@ -23,7 +23,7 @@ export function MailList({emails, togglePreview, onMoveToTrash}) {
               <Mailpreview
                 key={email.id}
                 email={email}
-                togglePreview={() => togglePreview(email.id, email.id)}
+                togglePreview={() => togglePreview(emails, email.id)}
                 onMoveToTrash={() => onMoveToTrash(emails, email.id)}
                 
               />

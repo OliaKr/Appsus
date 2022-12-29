@@ -8,6 +8,7 @@ export const mailService = {
     query,
     get,
     save,
+    remove,
 
 
 
@@ -227,6 +228,11 @@ function get(emailId) {
     } else {
         return storageService.post(MAIL_KEY, email)
     }
+}
+
+function remove(emailId) {
+  return storageService.remove(MAIL_KEY, emailId)
+  
 }
 
 
