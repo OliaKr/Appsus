@@ -1,5 +1,6 @@
 .note-edit {
     position: fixed;
+    z-index: 1;
     background-color: white;
     width: fit-content;
     border: solid 2px black;

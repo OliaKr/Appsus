@@ -12,6 +12,7 @@ export const noteService = {
     post,
     remove,
     getEmptyNote,
+    getColors,
 
 }
 
@@ -27,6 +28,21 @@ function getEmptyNote() {
         },
         style: {},
     }
+}
+
+function getColors(){
+    return [
+        '#fbbc04',
+        '#f28b82',
+        '#fff475',
+        '#ccff90',
+        '#a7ffeb',
+        '#cbf0f8',
+        '#aecbfa',
+        '#fdcfe8',
+        '#e6c9a8',
+        '#e8eaed',
+    ]
 }
 
 function query() {

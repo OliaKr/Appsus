@@ -32,7 +32,9 @@ export function NoteEdit({loadNotes,noteId}) {
     
     if (!noteToEdit) return
     console.log(noteToEdit.info);
-    return <section className="note-edit" onBlur={onCloseEdit}>
+    return <section className="note-edit" 
+    // onBlur={onCloseEdit}
+    >
         <input className="no-border"
             type="text"
             name="title"

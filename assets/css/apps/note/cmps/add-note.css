@@ -1,11 +1,12 @@
 .add-note {
     max-width: 600px;
     /* min-height: 50px; */
-    margin: 0 auto 2em;
+    height: 50px;
+    margin: 2em auto 2em;
     padding: .75em 1em;
-    border-radius: .75em;
+    border-radius: .5em;
 
-    box-shadow: 0 3px 5px rgb(0 0 0 / 20%);
+    box-shadow: 0px 2px 6px 2px rgb(0 0 0 / 22%);
 
 }
 
@@ -13,10 +14,6 @@
 .add-note input {
     width: 100%;
 }
-
-/* .add-note textarea{
-    resize: none;
-} */
 
 .add-note :focus-visible {
     outline: none;
