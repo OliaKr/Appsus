@@ -6,7 +6,9 @@ header {
 .app-header {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
+    align-items: center;
+    /* padding: 20px 0; */
+    height: 10vh;
 }
 
 nav a {
@@ -21,4 +23,24 @@ nav a.active {
     color: darkblue;
     font-weight: bold;
     text-decoration: overline;
+}
+
+.app-header form {
+    background-color: #f1f3f4;
+    padding: 0 10px;
+    height: 50%;
+    width: 50%;
+    border-radius: .5em;
+    box-shadow: 0 1px 1px 0 rgb(65 69 73 / 30%), 0 1px 3px 1px rgb(65 69 73 / 15%);
+}
+
+.app-header input {
+    background-color: #f1f3f4;
+    margin-left: 5px;
+    height: 90%;
+    width: 90%;
+}
+
+.app-header :focus-within {
+    background-color: white;
 }

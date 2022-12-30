@@ -36,6 +36,7 @@
 @import './apps/note/cmps/color-picker.css';
 @import './apps/note/cmps/screen.css';
 @import './apps/note/cmps/note-todos-edit.css';
+@import './apps/note/cmps/note-filter.css';
 
 /* mail */
 @import './apps/mail/cmps/mail-list.css';

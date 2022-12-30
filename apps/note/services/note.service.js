@@ -13,6 +13,7 @@ export const noteService = {
     remove,
     getEmptyNote,
     getEmptyTodosNote,
+    getDefaultFilter,
     getColors,
     getDefaultTodo,
     saveTodo,
@@ -27,7 +28,7 @@ function getDefaultTodo() {
 function saveTodo(noteId, todoToSave) {
     const notes = utilService.loadFromStorage(NOTE_KEY)
     const note = notes.find((note) => note.id === noteId)
-    console.log('note',note);
+    console.log('note', note)
     if (todoToSave.id) {
         let currTodo = note.info.todos.find((todo) => todo.id === todoToSave.id)
         currTodo = { ...todoToSave }
@@ -42,7 +43,7 @@ function saveTodo(noteId, todoToSave) {
 function removeTodo(noteId, todoId) {
     const notes = utilService.loadFromStorage(NOTE_KEY)
     let note = notes.find((note) => note.id === noteId)
-    console.log('note',note);
+    console.log('note', note)
     const newTodos = note.info.todos.filter((todo) => todo.id !== todoId)
     note.info.todos = newTodos
     utilService.saveToStorage(NOTE_KEY, notes)
@@ -72,7 +73,7 @@ function getEmptyNote() {
     }
 }
 
-function getEmptyTodosNote(){
+function getEmptyTodosNote() {
     return {
         id: utilService.makeId(),
         type: "note-todos",
@@ -103,9 +104,28 @@ function getColors() {
     ]
 }
 
-function query() {
+// function query() {
+//     return storageService.query(NOTE_KEY)
+//         .then(notes => notes)
+// }
+
+function query(filterBy = getDefaultFilter()) {
     return storageService.query(NOTE_KEY)
-        .then(notes => notes)
+        .then(notes => {
+            if (filterBy.txt) {
+                const regex = new RegExp(filterBy.txt, 'i')
+                notes = notes.filter(note => regex.test(note.info.txt) || regex.test(note.info.title ||
+                    regex.test(note.info.todos)))
+            }
+            if (filterBy.type) {
+                notes = notes.filter(note => note.type === filterBy.type)
+            }
+            return notes
+        })
+}
+
+function getDefaultFilter() {
+    return { txt: '', type: '' }
 }
 
 function save(note) {

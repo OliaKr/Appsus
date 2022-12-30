@@ -51,23 +51,8 @@ export function AddNote({ setNotes }) {
 
     return <section className="add-note"
         onBlur={onCloseNote}>
-        {/* {isExpanded && <input className="no-border"
-            type="text"
-            name="title"
-            placeholder="Title"
-            value={newNote.info.title}
-            onChange={handelChange} />}
-        <textarea className="no-border"
-            name="txt"
-            onClick={onInputClick}
-            placeholder="Take a note..."
-            value={newNote ? newNote.info.txt : ''}
-            onChange={handelChange} />
-            <button onClick={()=>{}}><i class="fa-regular fa-square-check"></i></button>
-        {isExpanded && <button onClick={onCloseNote}>Close</button>}
-        <section hidden={!isExpanded}></section>  */}
-
         {!isExpanded && <Fragment>
+            {/* <form> */}
             <textarea className="no-border"
                 name="txt"
                 onClick={onInputClick}
@@ -75,6 +60,7 @@ export function AddNote({ setNotes }) {
                 value={newNote ? newNote.info.txt : ''}
                 onChange={handelChange} />
             <button onClick={onCheckboxClick}><i className="fa-regular fa-square-check"></i></button>
+            {/* </form> */}
         </Fragment>}
         {isExpanded && <DynamicEdit note={newNote} handleChange={handleChange} />}
 
