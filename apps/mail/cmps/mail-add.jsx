@@ -1,7 +1,18 @@
+const { useState } = React
 
 export function MailAdd () {
 
-    return <h1>Hello new mail</h1>
+    const [subject, setSubject] = useState('')
+    const [recipient, setRecipient] = useState('')
+    const [message, setMessage] = useState('')
+
+    
+
+    return <div>
+        <h1>Hello new mail</h1>
+        
+        
+        </div>
 
     
     
