@@ -1,0 +1,20 @@
+.note-todos-edit {}
+
+.note-todos-edit .todos-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.note-todos-edit .todos-list button {
+    display: inline;
+}
+
+.note-todos-edit input[type=checkbox] {
+    display: inline;
+    width: 20px;
+}
+
+.note-todos-edit .todo-txt {
+    border: none;
+    width: 80%;
+}

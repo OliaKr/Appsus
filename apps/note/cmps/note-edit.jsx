@@ -2,9 +2,9 @@ const { useState, useEffect } = React
 const { useNavigate, useParams, Link } = ReactRouterDOM
 
 import { DynamicEdit } from "./dynamic-edit.jsx"
+import { OptionBar } from "./option-bar.jsx"
 
 import { noteService } from "../services/note.service.js"
-import { OptionBar } from "./option-bar.jsx"
 
 export function NoteEdit({ notes, setNotes, noteId }) {
     const [noteToEdit, setNoteToEdit] = useState(null)
@@ -24,16 +24,6 @@ export function NoteEdit({ notes, setNotes, noteId }) {
         })
     }
 
-    function handelCheckBoxChange({ target }) {
-        let { checked } = target
-        console.log('checked',checked);
-        const doneAt = checked ? Date.now() : null
-        setNoteToEdit(prevNote => {
-            const newInfo = { ...prevNote.info, doneAt }
-            return { ...prevNote, info: newInfo }
-        })
-    }
-
     function onCloseEdit(ev) {
         console.log(ev.relatedTarget)
         if (ev.relatedTarget) return
@@ -46,6 +36,26 @@ export function NoteEdit({ notes, setNotes, noteId }) {
         navigate('/note')
     }
 
+    function onDeleteNote(ev, noteId) {
+        ev.stopPropagation()
+        noteService.remove(noteId)
+            .then(console.log)
+        setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
+        navigate('/note')
+    }
+
+    function onChangeColor(ev, color) {
+        ev.stopPropagation()
+        changeColor(color, noteId)
+    }
+
+    function changeColor(color, noteId) {
+        const currNote = notes.find(note => note.id === noteId)
+        currNote.style.backgroundColor = color
+        noteService.save(currNote)
+        setNoteToEdit(currNote)
+    }
+
 
     if (!noteToEdit) return
     console.log(noteToEdit.info)
@@ -55,9 +65,10 @@ export function NoteEdit({ notes, setNotes, noteId }) {
     >
         <DynamicEdit
             note={noteToEdit}
-            handleChange={handelChange}
-            handelCheckBoxChange={handelCheckBoxChange} />
-        <OptionBar />
+            handleChange={handelChange} />
+        <OptionBar note={noteToEdit}
+            onChangeColor={onChangeColor}
+            onDeleteNote={onDeleteNote} />
         <button onClick={onCloseEdit}
             className="close-btn">Close</button>
     </section>

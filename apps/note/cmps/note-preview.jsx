@@ -1,24 +1,11 @@
-// const { useState, useEffect, useRef } = React
-// const { useNavigate, useParams, Link } = ReactRouterDOM
-
-// import { noteService } from "../services/note.service.js"
-// import { ColorPicker } from "./color-picker.jsx"
 import { DynamicNote } from "./dynamic-note.jsx"
 import { OptionBar } from "./option-bar.jsx"
 
-export function NotePreview({ note ,onUpdateNote,onDeleteNote,changeColor}) {
-    // const [isPikerOpen, setIsPikerOpen] = useState(false)
+export function NotePreview({ note, onUpdateNote, onDeleteNote, changeColor, onTogglePin }) {
 
-    // function onToggleColorPicker(ev) {
-    //     console.log(ev)
-    //     if (ev.relatedTarget) return
-    //     ev.stopPropagation()
-    //     setIsPikerOpen(prev => !prev)
-    // }
-
-    function onChangeColor(ev,color){
+    function onChangeColor(ev, color) {
         ev.stopPropagation()
-        changeColor(color,note.id)
+        changeColor(color, note.id)
     }
 
     console.log('note.style', note.style)
@@ -26,15 +13,11 @@ export function NotePreview({ note ,onUpdateNote,onDeleteNote,changeColor}) {
         // onBlur={onToggleColorPicker}
         style={{ backgroundColor: note.style.backgroundColor }}
         onClick={() => onUpdateNote(note.id)}>
-        <DynamicNote type={note.type} info={note.info}/>
-        <OptionBar onChangeColor={onChangeColor}
-        onDeleteNote={onDeleteNote} />
-
-        {/* <section className={`btns-container ${isPikerOpen ? 'show-btn' : ''}`}>
-            <button onClick={(ev) => onDeleteNote(ev, note.id)}><i className="fa-regular fa-trash-can"></i></button>
-            <button onClick={onToggleColorPicker}><i className="fa-solid fa-palette"></i></button>
-            {isPikerOpen && <ColorPicker onChangeColor={onChangeColor} currColor={note.style.backgroundColor} />}
-        </section> */}
+        <DynamicNote type={note.type} info={note.info} />
+        <OptionBar note={note}
+            onChangeColor={onChangeColor}
+            onDeleteNote={onDeleteNote}
+            onTogglePin={onTogglePin} />
     </section >
 }
 

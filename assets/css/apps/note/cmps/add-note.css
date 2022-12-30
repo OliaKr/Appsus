@@ -13,6 +13,11 @@
 .add-note textarea,
 .add-note input {
     width: 100%;
+    height: fit-content;
+}
+
+.add-note button{
+    font-size: 1.25em;
 }
 
 .add-note :focus-visible {

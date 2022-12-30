@@ -12,8 +12,48 @@ export const noteService = {
     post,
     remove,
     getEmptyNote,
+    getEmptyTodosNote,
     getColors,
+    getDefaultTodo,
+    saveTodo,
+    removeTodo,
+}
 
+function getDefaultTodo() {
+    return { txt: '', doneAt: null, id: utilService.makeId() }
+}
+
+
+function saveTodo(noteId, todoToSave) {
+    const notes = utilService.loadFromStorage(NOTE_KEY)
+    const note = notes.find((note) => note.id === noteId)
+    console.log('note',note);
+    if (todoToSave.id) {
+        let currTodo = note.info.todos.find((todo) => todo.id === todoToSave.id)
+        currTodo = { ...todoToSave }
+    } else {
+        const todo = _createTodo(todoToSave)
+        note.info.todos.unshift(todo)
+    }
+    utilService.saveToStorage(NOTE_KEY, notes)
+    // return Promise.resolve(todo)
+}
+
+function removeTodo(noteId, todoId) {
+    const notes = utilService.loadFromStorage(NOTE_KEY)
+    let note = notes.find((note) => note.id === noteId)
+    console.log('note',note);
+    const newTodos = note.info.todos.filter((todo) => todo.id !== todoId)
+    note.info.todos = newTodos
+    utilService.saveToStorage(NOTE_KEY, notes)
+    return Promise.resolve()
+}
+
+function _createTodo(todoToSave) {
+    return {
+        id: utilService.makeId(),
+        ...todoToSave,
+    }
 }
 
 function getEmptyNote() {
@@ -24,6 +64,22 @@ function getEmptyNote() {
         // createdAt: Date.now(),
         info: {
             txt: '',
+            title: ''
+        },
+        style: {
+            backgroundColor: 'white'
+        },
+    }
+}
+
+function getEmptyTodosNote(){
+    return {
+        id: utilService.makeId(),
+        type: "note-todos",
+        isPinned: false,
+        // createdAt: Date.now(),
+        info: {
+            todos: [],
             title: ''
         },
         style: {
@@ -92,10 +148,18 @@ function _createNotes() {
                 id: "n103",
                 type: "note-todos",
                 info: {
-                    label: "Get my stuff together",
+                    title: "Get my stuff together",
                     todos: [
-                        { txt: "Driving liscence", doneAt: null },
-                        { txt: "Coding power", doneAt: 187111111 }]
+                        {
+                            txt: "Driving liscence",
+                            doneAt: null,
+                            id: utilService.makeId()
+                        },
+                        {
+                            txt: "Coding power",
+                            doneAt: 187111111,
+                            id: utilService.makeId()
+                        }]
                 },
                 style: {
                     backgroundColor: 'white',
@@ -110,7 +174,7 @@ function _createNotes() {
                     txt: "",
                 },
                 style: {
-                    backgroundColor: "#00d"
+                    backgroundColor: "#fbbc04"
                 }
             }
         ]

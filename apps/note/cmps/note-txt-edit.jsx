@@ -1,7 +1,7 @@
 
 
 export function NoteTxtEdit({ note, handleChange }) {
-
+    console.log('note.info.txt', note.info.txt)
     return <section className="note-txt-edit">
         <input className="no-border"
             type="text"

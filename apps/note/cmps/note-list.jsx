@@ -4,7 +4,7 @@ import { NotePreview } from "./note-preview.jsx"
 
 import { noteService } from "../services/note.service.js"
 
-export function NoteList({ notes,setNotes }) {
+export function NoteList({ notes, setNotes }) {
     const navigate = useNavigate()
 
     function onUpdateNote(noteId) {
@@ -15,27 +15,33 @@ export function NoteList({ notes,setNotes }) {
         noteService.remove(noteId)
             .then(console.log)
         setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
-
     }
 
-    function changeColor(color,noteId) {
-        noteService.get(noteId)
-        .then(note=>{
-            noteService.save(note)
-            const currNote = notes.find(note=>note.id===noteId)
-            currNote.style.backgroundColor = color
-            setNotes(prevNotes=>([...prevNotes]))
-        })
+    function onTogglePin(ev, noteId) {
+        ev.stopPropagation()
+        const currNote = notes.find(note => note.id === noteId)
+        currNote.isPinned = !currNote.isPinned
+        noteService.save(currNote)
+        setNotes(prevNotes => ([...prevNotes]))
+    }
+
+    function changeColor(color, noteId) {
+        const currNote = notes.find(note => note.id === noteId)
+        currNote.style.backgroundColor = color
+        noteService.save(currNote)
+        setNotes(prevNotes => ([...prevNotes]))
     }
 
     return <section className="note-list">
-        {notes.map(note => <NotePreview 
-        note={note} 
-        onDeleteNote={onDeleteNote}
-        onUpdateNote={onUpdateNote}
-        changeColor={changeColor}
-        key={note.id} />)}
+        {notes.map(note => <NotePreview
+            note={note}
+            onDeleteNote={onDeleteNote}
+            onUpdateNote={onUpdateNote}
+            changeColor={changeColor}
+            onTogglePin={onTogglePin}
+            key={note.id} />)}
     </section>
-
 }
+
+
 

@@ -1,4 +1,4 @@
-const { useState, useEffect } = React
+const { useState, useEffect, Fragment } = React
 const { useNavigate, useParams, Link } = ReactRouterDOM
 
 
@@ -25,9 +25,16 @@ export function NoteIndex() {
             })
     }
 
+    const pinnedNotes = notes.filter(note => note.isPinned)
+
     return <section className="note-index">
-        <AddNote setNotes={setNotes} />
-        <NoteList notes={notes} setNotes={setNotes} />
+        <AddNote notes={notes} setNotes={setNotes} />
+        {pinnedNotes && <Fragment>
+            <h3>Pinned Notes</h3>
+            <NoteList notes={pinnedNotes} setNotes={setNotes} />
+        </Fragment>}
+        <h3>Notes</h3>
+        <NoteList notes={notes.filter(note => !note.isPinned)} setNotes={setNotes} />
         {noteId && <NoteEdit notes={notes} setNotes={setNotes} noteId={noteId} />}
         {noteId && <Screen />}
     </section>

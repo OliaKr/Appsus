@@ -28,8 +28,11 @@ img {
 
 textarea {
     resize: none;
+    font-family: inherit;
 }
 
 button {
     cursor: pointer;
+    border: none;
+    background-color: inherit;
 }
