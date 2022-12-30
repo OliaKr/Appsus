@@ -19,6 +19,7 @@ export function NoteEdit({ notes, setNotes, noteId, onDeleteNote, onTogglePin, o
     function handelChange({ target }) {
         let { value, name: field } = target
         setNoteToEdit(prevNote => {
+            value = field === 'url' ? noteService.getEmdeddedUrl(value) : value
             const newInfo = { ...prevNote.info, [field]: value }
             return { ...prevNote, info: newInfo }
         })
@@ -27,7 +28,8 @@ export function NoteEdit({ notes, setNotes, noteId, onDeleteNote, onTogglePin, o
     function onCloseEdit(ev) {
         console.log(ev.relatedTarget)
         if (ev.relatedTarget) return
-        if (noteToEdit.info.txt) {
+        if (noteToEdit.info.txt || noteToEdit.info.url) {
+            console.log('noteToEdit',noteToEdit);
             noteService.save(noteToEdit)
             const currNote = notes.find(note => note.id === noteId)
             currNote.info = { ...noteToEdit.info }

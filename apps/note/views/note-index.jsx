@@ -9,12 +9,12 @@ import { Screen } from "../cmps/screen.jsx"
 import { NoteFilter } from "../cmps/note-filter.jsx"
 
 import { noteService } from "../services/note.service.js"
+import { utilService } from "../../../services/util.service.js"
 
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
     const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
     const { noteId } = useParams()
-    console.log(noteId)
 
     useEffect(() => {
         loadNotes()
@@ -45,9 +45,11 @@ export function NoteIndex() {
     function onDuplicateNote(ev, noteId) {
         ev.stopPropagation()
         const currNote = notes.find(note => note.id === noteId)
+        console.log('currNote', currNote)
         const duplicateNote = { ...currNote, id: null }
+        console.log('duplicateNote', duplicateNote)
         noteService.save(duplicateNote)
-        setNotes(prevNotes => ([...prevNotes, duplicateNote]))
+            .then(note => setNotes(prevNotes => ([...prevNotes, note])))
     }
 
     const pinnedNotes = notes.filter(note => note.isPinned)
@@ -62,7 +64,7 @@ export function NoteIndex() {
                 onDeleteNote={onDeleteNote}
                 onTogglePin={onTogglePin}
                 onDuplicateNote={onDuplicateNote} />
-        <h3>Notes</h3>
+            <h3>Notes</h3>
         </Fragment>}
         <NoteList notes={notes.filter(note => !note.isPinned)}
             setNotes={setNotes}

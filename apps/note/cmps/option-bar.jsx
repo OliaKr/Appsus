@@ -6,9 +6,8 @@ export function OptionBar({ note, onChangeColor, onDeleteNote, onTogglePin, onDu
     const [isPikerOpen, setIsPikerOpen] = useState(false)
 
     function onToggleColorPicker(ev) {
-        console.log(ev)
-        if (ev.relatedTarget) return
         ev.stopPropagation()
+        if (ev.relatedTarget) return
         setIsPikerOpen(prev => !prev)
     }
     return <section className={`btns-container ${isPikerOpen ? 'show-btn' : ''}`}

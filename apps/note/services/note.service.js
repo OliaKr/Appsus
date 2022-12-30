@@ -13,7 +13,10 @@ export const noteService = {
     remove,
     getEmptyNote,
     getEmptyTodosNote,
+    getEmptyVideoNote,
+    getEmptyImgNote,
     getDefaultFilter,
+    getEmdeddedUrl,
     getColors,
     getDefaultTodo,
     saveTodo,
@@ -89,6 +92,38 @@ function getEmptyTodosNote() {
     }
 }
 
+function getEmptyVideoNote() {
+    return {
+        id: utilService.makeId(),
+        type: "note-video",
+        isPinned: false,
+        info: {
+            url: '',
+            title: '',
+            txt: '',
+        },
+        style: {
+            backgroundColor: 'white'
+        },
+    }
+}
+
+function getEmptyImgNote() {
+    return {
+        id: utilService.makeId(),
+        type: "note-img",
+        isPinned: false,
+        info: {
+            url: '',
+            title: '',
+            txt: '',
+        },
+        style: {
+            backgroundColor: 'white'
+        },
+    }
+}
+
 function getColors() {
     return [
         '#e8eaed',
@@ -104,10 +139,10 @@ function getColors() {
     ]
 }
 
-// function query() {
-//     return storageService.query(NOTE_KEY)
-//         .then(notes => notes)
-// }
+function getEmdeddedUrl(urlStr) {
+    const res = urlStr.split("=")
+    return "https://www.youtube.com/embed/" + res[1]
+}
 
 function query(filterBy = getDefaultFilter()) {
     return storageService.query(NOTE_KEY)
@@ -191,6 +226,17 @@ function _createNotes() {
                     url: "assets/img/audi.jpg",
                     // url: "https://www.w3schools.com/images/w3schools_green.jpg",
                     title: "Bobi and Me",
+                    txt: "",
+                },
+                style: {
+                    backgroundColor: "#fbbc04"
+                }
+            }, {
+                id: "n104",
+                type: "note-video",
+                info: {
+                    url: "https://www.youtube.com/embed/7zhga7DLloI",
+                    title: "funny video",
                     txt: "",
                 },
                 style: {

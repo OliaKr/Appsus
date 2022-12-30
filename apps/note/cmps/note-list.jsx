@@ -14,6 +14,7 @@ export function NoteList({ notes, setNotes, onDuplicateNote, onTogglePin, onDele
     function changeColor(color, noteId) {
         const currNote = notes.find(note => note.id === noteId)
         currNote.style.backgroundColor = color
+        console.log('currNote',currNote);
         noteService.save(currNote)
         setNotes(prevNotes => ([...prevNotes]))
     }
