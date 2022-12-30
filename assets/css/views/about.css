@@ -1,0 +1,14 @@
+.about-page{
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.about-page h1{
+    font-size: 2em;
+}
+
+.about-page img{
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+}
