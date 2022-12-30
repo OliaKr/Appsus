@@ -9,6 +9,7 @@ export const mailService = {
     get,
     save,
     remove,
+    getDefaultFilter,
 
 
 
@@ -207,12 +208,18 @@ const gEmails = [
     
 
 
-function query() {
+function query(filterBy = getDefaultFilter) {
     return storageService.query(MAIL_KEY)
         .then(emails => {
             if (!emails || !emails.length)
                 emails = gEmails
            utilService.saveToStorage(MAIL_KEY, emails)
+
+           if (filterBy.txt) {
+            const regex = new RegExp(filterBy.txt, 'i')
+            emails = emails.filter(email => regex.test(email.from))
+            
+           }
            return emails
         })
         
@@ -233,6 +240,10 @@ function get(emailId) {
 function remove(emailId) {
   return storageService.remove(MAIL_KEY, emailId)
   
+}
+
+function getDefaultFilter() {
+  return { txt: ''}
 }
 
 

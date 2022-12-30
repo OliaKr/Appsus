@@ -1,0 +1,17 @@
+.mail-header {
+    height: 8vh;
+    background-color: rgb(217, 238, 244);
+    width: 100%;
+}
+
+.mail-main-header {
+    height: 100%;
+    margin: 0 5%;
+    padding: 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* .mail-header img {
+    height: 50px;
+} */
