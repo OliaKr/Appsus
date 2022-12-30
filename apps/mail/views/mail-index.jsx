@@ -2,26 +2,25 @@ const { useState, useEffect } = React
 
 import { MailList } from "../cmps/mail-list.jsx"
 import { mailService } from '../services/mail.service.js'
-import { MailHeader } from "../cmps/mail-header.jsx"
+import { MailSearch } from "../cmps/mail-search.jsx"
 import { MailDetails } from "../cmps/mail.-details.jsx"
 
 
 export function MailIndex() {
-
+    const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter)
     const [emails, setEmails] = useState([])
-    // const {emailId}= useParams()
-
 
     useEffect(() => {
+        console.log('loading emails...' );
         loadEmails()
 
+    }, [filterBy])
 
-    }, [])
 
     function loadEmails() {
-        mailService.query().then(emailsToUpdate => setEmails(emailsToUpdate))
-        console.log('emails after state', emails);
+        mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate))
     }
+
     console.log('emails', emails);
 
     function onMoveToTrash(emails, emailId) {
@@ -30,7 +29,10 @@ export function MailIndex() {
             console.log('emails trashed', emails);
         });
         mailService.save(emails)
-        
+    }
+
+    function onSetFilter(filterBy) {
+        setFilterBy(filterBy)
     }
 
     // function onMoveToTrash(emailId) {
@@ -41,21 +43,21 @@ export function MailIndex() {
 
 
     //     })
-        
-    // }
 
+    // }console.log('filterBy from mailIndex', filterBy);
+
+    console.log('filterBy from mailIndex', filterBy);
     console.log('emails are emails', emails);
     return <div className="mail-index flex">
 
-        {/* <h1>Hello from main index!</h1> */}
 
-        <MailHeader/>
-        
-    
+        <MailSearch onSetFilter={onSetFilter} />
+
+
         < MailList emails={emails}
-        onMoveToTrash={onMoveToTrash}
-        
-      
+            onMoveToTrash={onMoveToTrash}
+
+
         />
         {/* {emailId && < MailDetails loadEmails={loadEmails} emailId = {emailId}
         

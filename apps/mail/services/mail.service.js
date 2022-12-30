@@ -237,7 +237,7 @@ function remove(emailId) {
 }
 
 function getDefaultFilter() {
-  return { txt: 'kim'}
+  return { txt: ''}
 }
 
 
