@@ -1,7 +1,7 @@
 
 export function MailFolderList() {
 
-    return <div class="mail-folder-list-column">
+    return <div className="mail-folder-list-column">
 
         <ul>
             <li>

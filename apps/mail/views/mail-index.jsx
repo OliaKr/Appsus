@@ -4,15 +4,17 @@ import { MailList } from "../cmps/mail-list.jsx"
 import { mailService } from '../services/mail.service.js'
 import { MailSearch } from "../cmps/mail-search.jsx"
 import { MailDetails } from "../cmps/mail.-details.jsx"
-import {MailFolderList} from "../cmps/mail-folderList.jsx"
+import { MailFolderList } from "../cmps/mail-folderList.jsx"
+import { MailAdd } from "../cmps/mail-add.jsx"
 
 
 export function MailIndex() {
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter)
     const [emails, setEmails] = useState([])
+    const [selectedEmail, setSelectedEmail] = useState(null)
 
     useEffect(() => {
-        console.log('loading emails...' );
+        console.log('loading emails...');
         loadEmails()
 
     }, [filterBy])
@@ -24,28 +26,32 @@ export function MailIndex() {
 
     console.log('emails', emails);
 
-    function onMoveToTrash(emails, emailId) {
-        emails.forEach((email) => {
-            if (email.id === emailId) email.isTrash = true
-            console.log('emails trashed', emails);
-        });
-        mailService.save(emails)
-    }
+    // function onMoveToTrash(emails, emailId) {
+    //     emails.forEach((email) => {
+    //         if (email.id === emailId) email.isTrash = true
+    //         console.log('emails trashed', emails);
+    //     });
+    //     mailService.save(emails)
+    // }
 
     function onSetFilter(filterBy) {
         setFilterBy(filterBy)
     }
 
-    // function onMoveToTrash(emailId) {
-    //     mailService.save(emailId)
-    //     .then(()  => {
-    //         const updateEmails = emails.filter(email => email.id !== emailId)
-    //         setEmails(updateEmails)
+    function onMoveToTrash(emails, emailId) {
+        console.log('Removing', emails)
+        mailService.remove(emailId)
+            .then(() => {
+                const updateEmails = emails.filter(email => email.id !== emailId)
+                setEmails(updateEmails)
+                // console.log('removed')
+            })
 
+            .catch(err => {
+                console.log('Had error:', err)
+            })
+    }
 
-    //     })
-
-    // }console.log('filterBy from mailIndex', filterBy);
 
     console.log('filterBy from mailIndex', filterBy);
     console.log('emails are emails', emails);
@@ -53,15 +59,18 @@ export function MailIndex() {
 
 
         <MailSearch onSetFilter={onSetFilter} />
-        <MailFolderList/>
+        <MailFolderList />
         < MailList emails={emails}
             onMoveToTrash={onMoveToTrash}
-
-
         />
+        {selectedEmail &&<MailDetails />}
         {/* {emailId && < MailDetails loadEmails={loadEmails} emailId = {emailId}
         
         />} */}
+
+        <MailAdd/>
+
+
 
 
     </div>

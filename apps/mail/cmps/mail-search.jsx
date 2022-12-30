@@ -1,4 +1,4 @@
-const { useState } = React
+const { useState, useEffect } = React
 
 import { mailService } from "../services/mail.service.js"
 
@@ -6,6 +6,10 @@ export function MailSearch({ onSetFilter }) {
 
     const [filterByToEdit, setFilterbyToEdit] = useState(mailService.getDefaultFilter)
     // console.log('filterByToEdit', filterByToEdit);
+
+    // useEffect(() => {
+    //     onSetFilter(setFilterbyToEdit)
+    // }, [filterByToEdit])
 
     function handleChange({ target }) {
         let { value, name: field, type } = target
