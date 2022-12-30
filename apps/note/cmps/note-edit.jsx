@@ -58,6 +58,7 @@ export function NoteEdit({ notes, setNotes, noteId, onDeleteNote, onTogglePin, o
     >
         <DynamicEdit
             note={noteToEdit}
+            setNotes={setNotes}
             handleChange={handelChange} />
         <OptionBar note={noteToEdit}
             onChangeColor={onChangeColor}

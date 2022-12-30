@@ -4,7 +4,7 @@ import { NoteTxtEdit } from "./note-txt-edit.jsx"
 import { NoteVideoEdit } from "./note-video-edit.jsx"
 
 
-export function DynamicEdit({ note, handleChange }) {
+export function DynamicEdit({ note, setNotes, handleChange }) {
 
     switch (note.type) {
         case 'note-txt':
@@ -21,6 +21,7 @@ export function DynamicEdit({ note, handleChange }) {
 
         case 'note-todos':
             return <NoteTodosEdit note={note}
+                setNotes={setNotes}
                 handleChange={handleChange} />
     }
 }

@@ -13,8 +13,9 @@ export function NoteTodosList({ todos, onSaveTodo, onRemoveTodo, handleCheckBoxC
         </li> */}
         {todos.map(todo => <li key={todo.id}
             onBlur={() => onSaveTodo(todo)}>
-            <NoteTodosPreview todo={todo} onRemoveTodo={onRemoveTodo}
-                handelCheckBoxChange={handleCheckBoxChange}
+            <NoteTodosPreview todo={todo}
+                onRemoveTodo={onRemoveTodo}
+                handleCheckBoxChange={handleCheckBoxChange}
                 handleChangeTodo={handleChangeTodo} />
         </li>
         )}

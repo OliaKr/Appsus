@@ -2,7 +2,7 @@ const { useState, useEffect } = React
 import { noteService } from "../services/note.service.js"
 import { NoteTodosList } from "./note-todos-list.jsx"
 
-export function NoteTodosEdit({ note, handleChange }) {
+export function NoteTodosEdit({ note, setNotes, handleChange }) {
     const [todos, setTodos] = useState(note.info.todos)
     const { title } = note.info
 
@@ -18,15 +18,17 @@ export function NoteTodosEdit({ note, handleChange }) {
     }
 
     function onSaveTodo(todoToSave) {
-        // if(!todo.txt) return
-        console.log('todos', todos)
+        const noteId = note.id
         const currTodo = todos.find(todo => todo.id === todoToSave.id)
-        noteService.saveTodo(note.id, todoToSave)
-        // if (!currTodo) setTodos(prevTodos => ([...prevTodos, todoToSave]))
-        // else setTodos(prevTodos => ([...prevTodos]))
+        noteService.saveTodo(noteId, todoToSave)
         setTodos(prevTodos => ([...prevTodos]))
         const newInfo = { ...note.info, todos }
         noteService.save({ ...note, info: newInfo })
+        setNotes(prevNotes => {
+            const idx = prevNotes.findIndex(note => note.id === noteId)
+            prevNotes.splice(idx, 1, note)
+            return ([...prevNotes])
+        })
     }
 
     function handleChangeTodo(todoId, target) {
@@ -34,6 +36,7 @@ export function NoteTodosEdit({ note, handleChange }) {
         let currTodo = todos.find(todo => todo.id === todoId)
         currTodo[field] = value
         setTodos(prevTodos => ([...prevTodos]))
+        noteService.save(note)
     }
 
     function handleCheckBoxChange(todoId, target) {
@@ -41,6 +44,7 @@ export function NoteTodosEdit({ note, handleChange }) {
         const currTodo = todos.find(todo => todo.id === todoId)
         currTodo.doneAt = checked ? Date.now() : null
         setTodos(prevTodos => ([...prevTodos]))
+        noteService.save(note)
     }
 
 
@@ -59,3 +63,5 @@ export function NoteTodosEdit({ note, handleChange }) {
             handleCheckBoxChange={handleCheckBoxChange} />
     </section>
 }
+
+
