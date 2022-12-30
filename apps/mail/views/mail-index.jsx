@@ -4,6 +4,7 @@ import { MailList } from "../cmps/mail-list.jsx"
 import { mailService } from '../services/mail.service.js'
 import { MailSearch } from "../cmps/mail-search.jsx"
 import { MailDetails } from "../cmps/mail.-details.jsx"
+import {MailFolderList} from "../cmps/mail-folderList.jsx"
 
 
 export function MailIndex() {
@@ -52,8 +53,7 @@ export function MailIndex() {
 
 
         <MailSearch onSetFilter={onSetFilter} />
-
-
+        <MailFolderList/>
         < MailList emails={emails}
             onMoveToTrash={onMoveToTrash}
 
