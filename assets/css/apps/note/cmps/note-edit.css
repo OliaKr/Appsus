@@ -2,7 +2,7 @@
     position: fixed;
     z-index: 1;
     background-color: white;
-    width: 60vw;
+    width: 80vw;
     min-width: fit-content;
     border: solid 2px black;
     padding: 0.75em 1em;
@@ -35,3 +35,4 @@
     background-color: #00000010;
     border-radius: 5px;
 }
+
