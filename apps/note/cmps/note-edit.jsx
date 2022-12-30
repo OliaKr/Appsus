@@ -6,7 +6,7 @@ import { OptionBar } from "./option-bar.jsx"
 
 import { noteService } from "../services/note.service.js"
 
-export function NoteEdit({ notes, setNotes, noteId }) {
+export function NoteEdit({ notes, setNotes, noteId, onDeleteNote, onTogglePin, onDuplicateNote }) {
     const [noteToEdit, setNoteToEdit] = useState(null)
     const navigate = useNavigate()
 
@@ -36,14 +36,6 @@ export function NoteEdit({ notes, setNotes, noteId }) {
         navigate('/note')
     }
 
-    function onDeleteNote(ev, noteId) {
-        ev.stopPropagation()
-        noteService.remove(noteId)
-            .then(console.log)
-        setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
-        navigate('/note')
-    }
-
     function onChangeColor(ev, color) {
         ev.stopPropagation()
         changeColor(color, noteId)
@@ -56,7 +48,6 @@ export function NoteEdit({ notes, setNotes, noteId }) {
         setNoteToEdit(currNote)
     }
 
-
     if (!noteToEdit) return
     console.log(noteToEdit.info)
     return <section className="note-edit"
@@ -68,25 +59,11 @@ export function NoteEdit({ notes, setNotes, noteId }) {
             handleChange={handelChange} />
         <OptionBar note={noteToEdit}
             onChangeColor={onChangeColor}
-            onDeleteNote={onDeleteNote} />
+            onDeleteNote={onDeleteNote}
+            onTogglePin={onTogglePin}
+            onDuplicateNote={onDuplicateNote} />
         <button onClick={onCloseEdit}
             className="close-btn">Close</button>
     </section>
 
 }
-
-
-{/* <input className="no-border"
-    type="text"
-    name="title"
-    placeholder="Title"
-    value={noteToEdit.info.title}
-    onChange={handelChange} />
-<textarea className="no-border"
-    name="txt"
-    placeholder="Take a note..."
-    value={noteToEdit.info.txt}
-    onChange={handelChange} />
-<button onClick={onCloseEdit}>Close</button> */}
-
-

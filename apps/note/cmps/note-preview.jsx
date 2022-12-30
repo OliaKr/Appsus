@@ -1,7 +1,7 @@
 import { DynamicNote } from "./dynamic-note.jsx"
 import { OptionBar } from "./option-bar.jsx"
 
-export function NotePreview({ note, onUpdateNote, onDeleteNote, changeColor, onTogglePin }) {
+export function NotePreview({ note,onUpdateNote, onDeleteNote, changeColor, onTogglePin,onDuplicateNote }) {
 
     function onChangeColor(ev, color) {
         ev.stopPropagation()
@@ -17,7 +17,8 @@ export function NotePreview({ note, onUpdateNote, onDeleteNote, changeColor, onT
         <OptionBar note={note}
             onChangeColor={onChangeColor}
             onDeleteNote={onDeleteNote}
-            onTogglePin={onTogglePin} />
+            onTogglePin={onTogglePin}
+            onDuplicateNote={onDuplicateNote} />
     </section >
 }
 

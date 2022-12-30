@@ -4,25 +4,11 @@ import { NotePreview } from "./note-preview.jsx"
 
 import { noteService } from "../services/note.service.js"
 
-export function NoteList({ notes, setNotes }) {
+export function NoteList({ notes, setNotes, onDuplicateNote, onTogglePin, onDeleteNote }) {
     const navigate = useNavigate()
 
     function onUpdateNote(noteId) {
         navigate(`/note/${noteId}`)
-    }
-    function onDeleteNote(ev, noteId) {
-        ev.stopPropagation()
-        noteService.remove(noteId)
-            .then(console.log)
-        setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
-    }
-
-    function onTogglePin(ev, noteId) {
-        ev.stopPropagation()
-        const currNote = notes.find(note => note.id === noteId)
-        currNote.isPinned = !currNote.isPinned
-        noteService.save(currNote)
-        setNotes(prevNotes => ([...prevNotes]))
     }
 
     function changeColor(color, noteId) {
@@ -39,6 +25,7 @@ export function NoteList({ notes, setNotes }) {
             onUpdateNote={onUpdateNote}
             changeColor={changeColor}
             onTogglePin={onTogglePin}
+            onDuplicateNote={onDuplicateNote}
             key={note.id} />)}
     </section>
 }
