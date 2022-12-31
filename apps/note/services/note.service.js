@@ -12,8 +12,52 @@ export const noteService = {
     post,
     remove,
     getEmptyNote,
+    getEmptyTodosNote,
+    getEmptyVideoNote,
+    getEmptyImgNote,
+    getDefaultFilter,
+    getEmdeddedUrl,
     getColors,
+    getDefaultTodo,
+    saveTodo,
+    removeTodo,
+}
 
+function getDefaultTodo() {
+    return { txt: '', doneAt: null, id: utilService.makeId() }
+}
+
+
+function saveTodo(noteId, todoToSave) {
+    const notes = utilService.loadFromStorage(NOTE_KEY)
+    const note = notes.find((note) => note.id === noteId)
+    console.log('note', note)
+    if (todoToSave.id) {
+        let currTodo = note.info.todos.find((todo) => todo.id === todoToSave.id)
+        currTodo = { ...todoToSave }
+    } else {
+        const todo = _createTodo(todoToSave)
+        note.info.todos.unshift(todo)
+    }
+    utilService.saveToStorage(NOTE_KEY, notes)
+    // return Promise.resolve(todo)
+}
+
+function removeTodo(noteId, todoId) {
+    const notes = utilService.loadFromStorage(NOTE_KEY)
+    let note = notes.find((note) => note.id === noteId)
+    console.log('note', note)
+    const newTodos = note.info.todos.filter((todo) => todo.id !== todoId)
+    note.info.todos = newTodos
+    utilService.saveToStorage(NOTE_KEY, notes)
+    return Promise.resolve()
+}
+
+function _createTodo(todoToSave) {
+    return {
+        id: utilService.makeId(),
+        ...todoToSave,
+    }
 }
 
 function getEmptyNote() {
@@ -25,6 +69,54 @@ function getEmptyNote() {
         info: {
             txt: '',
             title: ''
+        },
+        style: {
+            backgroundColor: 'white'
+        },
+    }
+}
+
+function getEmptyTodosNote() {
+    return {
+        id: utilService.makeId(),
+        type: "note-todos",
+        isPinned: false,
+        // createdAt: Date.now(),
+        info: {
+            todos: [],
+            title: ''
+        },
+        style: {
+            backgroundColor: 'white'
+        },
+    }
+}
+
+function getEmptyVideoNote() {
+    return {
+        id: utilService.makeId(),
+        type: "note-video",
+        isPinned: false,
+        info: {
+            url: '',
+            title: '',
+            txt: '',
+        },
+        style: {
+            backgroundColor: 'white'
+        },
+    }
+}
+
+function getEmptyImgNote() {
+    return {
+        id: utilService.makeId(),
+        type: "note-img",
+        isPinned: false,
+        info: {
+            url: '',
+            title: '',
+            txt: '',
         },
         style: {
             backgroundColor: 'white'
@@ -47,9 +139,28 @@ function getColors() {
     ]
 }
 
-function query() {
+function getEmdeddedUrl(urlStr) {
+    const res = urlStr.split("=")
+    return "https://www.youtube.com/embed/" + res[1]
+}
+
+function query(filterBy = getDefaultFilter()) {
     return storageService.query(NOTE_KEY)
-        .then(notes => notes)
+        .then(notes => {
+            if (filterBy.txt) {
+                const regex = new RegExp(filterBy.txt, 'i')
+                notes = notes.filter(note => regex.test(note.info.txt) || regex.test(note.info.title ||
+                    regex.test(note.info.todos)))
+            }
+            if (filterBy.type) {
+                notes = notes.filter(note => note.type === filterBy.type)
+            }
+            return notes
+        })
+}
+
+function getDefaultFilter() {
+    return { txt: '', type: '' }
 }
 
 function save(note) {
@@ -92,10 +203,18 @@ function _createNotes() {
                 id: "n103",
                 type: "note-todos",
                 info: {
-                    label: "Get my stuff together",
+                    title: "Get my stuff together",
                     todos: [
-                        { txt: "Driving liscence", doneAt: null },
-                        { txt: "Coding power", doneAt: 187111111 }]
+                        {
+                            txt: "Driving liscence",
+                            doneAt: null,
+                            id: utilService.makeId()
+                        },
+                        {
+                            txt: "Coding power",
+                            doneAt: 187111111,
+                            id: utilService.makeId()
+                        }]
                 },
                 style: {
                     backgroundColor: 'white',
@@ -106,10 +225,22 @@ function _createNotes() {
                 info: {
                     url: "assets/img/audi.jpg",
                     // url: "https://www.w3schools.com/images/w3schools_green.jpg",
-                    title: "Bobi and Me"
+                    title: "Bobi and Me",
+                    txt: "",
                 },
                 style: {
-                    backgroundColor: "#00d"
+                    backgroundColor: "#fbbc04"
+                }
+            }, {
+                id: "n104",
+                type: "note-video",
+                info: {
+                    url: "https://www.youtube.com/embed/7zhga7DLloI",
+                    title: "funny video",
+                    txt: "",
+                },
+                style: {
+                    backgroundColor: "#fbbc04"
                 }
             }
         ]

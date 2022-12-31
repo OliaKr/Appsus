@@ -4,7 +4,6 @@ import { noteService } from "../services/note.service.js"
 
 export function ColorPicker({ onChangeColor, currColor }) {
     const colors = noteService.getColors()
-    console.log('currColor', currColor)
 
     return <section className="color-picker">
         {colors.map(color => <button key={color}

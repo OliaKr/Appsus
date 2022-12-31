@@ -1,12 +1,14 @@
 header {
-    background: lightcyan;
-    border-bottom: 2px solid white;
+    background: rgb(255, 255, 255);
+    border-bottom: 2px solid rgb(80, 80, 80);
 }
 
 .app-header {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
+    align-items: center;
+    padding: 0 10px;
+    height: 10vh;
 }
 
 nav a {
@@ -20,5 +22,55 @@ nav a:active {
 nav a.active {
     color: darkblue;
     font-weight: bold;
-    text-decoration: overline;
+    /* text-decoration: overline; */
+}
+
+.app-header form {
+    background-color: #f1f3f4;
+    padding: 0 10px;
+    height: 50%;
+    width: 50%;
+    border-radius: .5em;
+    box-shadow: 0 1px 1px 0 rgb(65 69 73 / 30%), 0 1px 3px 1px rgb(65 69 73 / 15%);
+}
+
+.app-header input {
+    background-color: #f1f3f4;
+    margin-left: 5px;
+    height: 90%;
+    width: 50%;
+}
+
+.app-header :focus-within {
+    background-color: white;
+}
+
+.app-header button {
+    font-size: 2em;
+}
+
+.app-header .main-nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 70px;
+    gap: 10px;
+    position: fixed;
+    z-index: 2;
+    text-align: center;
+    top: 10vh;
+    right: 0;
+    height: fit-content;
+    background: rgb(255 255 255);
+    border-inline-start: 1px solid #ccc;
+    min-width: 200px;
+    box-shadow: -6px 0px 14px rgb(0 0 0 / 20%);
+    border-radius: .5em;
+}
+
+.app-header .main-nav i {
+    font-size: 2em;
+}
+
+.app-header .main-nav article {
+    color: rgb(182, 182, 182);
 }

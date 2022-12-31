@@ -22,9 +22,12 @@
     ;
 }
 
-.note-preview .btns-container {
-    opacity: 0;
+@media (min-width: 540px) {
+    .note-preview .btns-container {
+        opacity: 0;
+    }
 }
+
 
 .note-preview:hover .btns-container {
     opacity: 1;
@@ -38,3 +41,4 @@
     background-color: inherit;
     border: none;
 }
+

@@ -28,4 +28,19 @@ img {
 
 textarea {
     resize: none;
+    font-family: inherit;
+}
+
+input {
+    border: none;
+}
+
+:focus-visible {
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background-color: inherit;
 }
