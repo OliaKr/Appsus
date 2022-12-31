@@ -47,7 +47,6 @@ export function MailIndex() {
                     .then(filteredEmails => setEmails(filteredEmails.filter(email => !email.isRead && !email.isTrash)))
                 break
             case "trash":
-<<<<<<< HEAD
                 mailService.query(filterBy)
                     .then(filteredEmails => setEmails(filteredEmails.filter(email => email.isTrash)))
                 break
@@ -55,14 +54,6 @@ export function MailIndex() {
                 mailService.query(filterBy)
                     .then(filteredEmails => setEmails(filteredEmails.filter(email => email.star)))
                 break
-=======
-                mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter((email) => email.isTrash)));
-                break;
-
-            default:
-                console.log("field is kind of odd", field);
-
->>>>>>> origin/main
         }
     }
 
@@ -91,16 +82,8 @@ export function MailIndex() {
             <i class="fa-solid fa-pen"></i> Compose</button>
         {!isComposeMail && <div className="container">
             <MailFolderList filterFunction={filterMailByType} />
-<<<<<<< HEAD
             {emails.length > 0 && < MailList emails={emails} onMoveToTrash={onMoveToTrash} />}
             {!emails.length && <div>No mails to display</div>}
-=======
-            < MailList emails={emails} onMoveToTrash={onMoveToTrash} />
-            {/* <EmailCounter /> */}
-            
-            
-
->>>>>>> origin/main
         </div>
         }
         {/* {selectedEmail && <MailDetails />} */}
@@ -108,4 +91,6 @@ export function MailIndex() {
         {isComposeMail && <MailAdd closeComposeMail={() => { setComposeMail(false) }} />}
     </main>
 }
+
+
 
