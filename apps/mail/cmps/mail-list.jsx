@@ -1,7 +1,11 @@
 import { mailService } from "../services/mail.service.js"
 import { Mailpreview } from "./mail-preview.jsx";
+const { useParams, useNavigate } = ReactRouterDOM
+
 
 export function MailList({emails, onMoveToTrash}) {
+
+  const navigate = useNavigate();
 
     function togglePreview(emailId) {
       console.log("in toggle oreview");
@@ -11,7 +15,8 @@ export function MailList({emails, onMoveToTrash}) {
                 email.isOpen = !email.isOpen
                 console.log('after change', email.isOpen);
                 email.isRead = true;
-                mailService.save(email).then(()=>{console.log("success saving")})
+                mailService.save(email).then(()=>{console.log("success saving")});
+                navigate(`/mail/${emailId}`);
             }
         })
         

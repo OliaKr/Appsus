@@ -2,8 +2,15 @@
     max-width: 20%;
     padding: 10px;
 
+
+
   }
   
+  .mail-folder-list ul {
+    padding: 0;
+  
+}
+
   li {
     list-style: none; /* remove the default bullet point */
     font-size: 1.2em; /* increase the font size */
