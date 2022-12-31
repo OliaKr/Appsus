@@ -1,0 +1,35 @@
+.mail-add {
+    margin: 0 auto;
+    width: 90vw;
+    border-radius: .75em;
+    border: 1px solid black;
+    margin-top: 1em;
+}
+
+.mail-add .new-mail-header {
+    background-color: #0092ff;
+    border-radius: .5em .5em 1px 1px;
+    color: white;
+    padding: 0 10px;
+    font-size: 1.25rem;
+}
+
+.mail-add input {
+    width: 100%;
+    border-bottom: 1px solid rgba(199, 199, 199, 0.784);
+    font-size: 1em;
+    padding: 5px;
+}
+
+.mail-add textarea {
+    min-height: 15vh;
+    font-size: 1em;
+}
+
+.mail-add button {
+    background-color: #0092ff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 10px;
+}

@@ -40,32 +40,31 @@ export const MailAdd = ({ closeComposeMail }) => {
   };
 
   return (
-    <div className='compose-mail flex-column'>
+    <div className='mail-add flex-column'>
       <div className='new-mail-header'>new message</div>
       <form onSubmit={onSendMail}>
         <div className='to-subject flex-column'>
           <input
             type='text'
             name='to'
-            placeholder='To'
+            placeholder='To:'
             value={recepient}
             onChange={handleChange} 
           />
           <input
             type='text'
             name='subject'
-            placeholder='Subject'
+            placeholder='Subject:'
             value={subject}
             onChange={handleChange}
           />
           <textarea
             value={message}
+            placeholder='Your message'
             onChange={handleChange}
             name='message'
           ></textarea>
-          <div className='send'>
             <button onClick={onSendMail}>Send</button>
-          </div>
         </div>
       </form>
     </div>

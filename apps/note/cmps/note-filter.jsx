@@ -23,9 +23,5 @@ export function NoteFilter({ setFilterBy }) {
         onClick={() => setFilterBy(prevFilter => ({ ...prevFilter, type: 'note-video' }))}>
             <i className="fa-brands fa-youtube"></i>
         </div>
-        {/* <div onClick={() => setFilterByToEdit(prevFilter => ({ ...prevFilter, type: '' }))}>
-            <i className="side-bar-icons fas fa-photo-video"></i>
-        </div> */}
-
     </aside>
 }

@@ -61,7 +61,7 @@ export function AddNote({ setNotes }) {
                 note={newNote}
                 handleChange={handleChange}
                 saveImg={saveImg} />
-            <button onClick={onSaveNote}><i class="fa-solid fa-floppy-disk"></i></button>
+            <button onClick={onSaveNote}><i className="fa-solid fa-floppy-disk"></i></button>
         </section>
     </Fragment>
 }

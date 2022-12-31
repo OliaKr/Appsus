@@ -1,4 +1,8 @@
 .mail-list {
-    width: 90%;
-  }
-  
+  width: 90%;
+  border-radius: 1em;
+}
+
+.mail-list {
+  overflow-y: scroll;
+}

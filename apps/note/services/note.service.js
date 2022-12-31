@@ -182,6 +182,7 @@ function _createNotes() {
             }, {
                 id: "n103",
                 type: "note-todos",
+                isPinned: false,
                 info: {
                     title: "Get my stuff together",
                     todos: [
@@ -202,10 +203,10 @@ function _createNotes() {
             }, {
                 id: "n102",
                 type: "note-img",
+                isPinned: true,
                 info: {
                     url: "assets/img/audi.jpg",
-                    // url: "https://www.w3schools.com/images/w3schools_green.jpg",
-                    title: "Bobi and Me",
+                    title: "car to buy",
                     txt: "",
                 },
                 style: {
@@ -214,15 +215,77 @@ function _createNotes() {
             }, {
                 id: "n104",
                 type: "note-video",
+                isPinned: false,
                 info: {
                     url: "https://www.youtube.com/embed/7zhga7DLloI",
                     title: "funny video",
                     txt: "",
                 },
                 style: {
-                    backgroundColor: "#fbbc04"
+                    backgroundColor: "#ccff90"
                 }
-            }
+            }, {
+                id: "n105",
+                type: "note-video",
+                isPinned: true,
+                info: {
+                    url: "https://www.youtube.com/embed/TCoITm8bdnM",
+                    title: "graet song",
+                    txt: "listen later",
+                },
+                style: {
+                    backgroundColor: "#ccff90"
+                }
+            }, {
+                id: "n106",
+                type: "note-img",
+                isPinned: false,
+                info: {
+                    url: "assets/img/liad.jpg",
+                    title: "LONDON",
+                    txt: "",
+                },
+                style: {
+                    backgroundColor: "#a7ffeb"
+                }
+            }, {
+                id: "n107",
+                type: "note-todos",
+                isPinned: true,
+                info: {
+                    title: "Get my stuff together",
+                    todos: [
+                        {
+                            txt: "buy this",
+                            doneAt: null,
+                            id: utilService.makeId()
+                        },
+                        {
+                            txt: "visit my uncle",
+                            doneAt: 187111111,
+                            id: utilService.makeId()
+                        },
+                        {
+                            txt: "go to the gym",
+                            doneAt: null,
+                            id: utilService.makeId()
+                        }]
+                },
+                style: {
+                    backgroundColor: 'white',
+                },
+            }, {
+                id: "n108",
+                type: "note-txt",
+                isPinned: false,
+                info: {
+                    txt: "study React!",
+                    title: 'Later'
+                },
+                style: {
+                    backgroundColor: '#ccff90',
+                },
+            },
         ]
     }
     utilService.saveToStorage(NOTE_KEY, notes)

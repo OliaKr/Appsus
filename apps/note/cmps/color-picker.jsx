@@ -1,4 +1,3 @@
-const { useState, useEffect, useRef } = React
 
 import { noteService } from "../services/note.service.js"
 

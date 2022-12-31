@@ -1,5 +1,5 @@
 const { useState, useEffect, Fragment } = React
-const { useNavigate, useParams, Link } = ReactRouterDOM
+// const { useNavigate, useParams, Link } = ReactRouterDOM
 
 
 import { AddNote } from "../cmps/add-note.jsx"
@@ -7,12 +7,12 @@ import { NoteList } from "../cmps/note-list.jsx"
 import { NoteFilter } from "../cmps/note-filter.jsx"
 
 import { noteService } from "../services/note.service.js"
-import { utilService } from "../../../services/util.service.js"
+// import { utilService } from "../../../services/util.service.js"
 
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
     const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
-    const { noteId } = useParams()
+    // const { noteId } = useParams()
 
     useEffect(() => {
         loadNotes()
@@ -58,7 +58,7 @@ export function NoteIndex() {
 
     const pinnedNotes = notes.filter(note => note.isPinned)
 
-    return <section className="note-index">
+    return <main className="note-index">
         <NoteFilter setFilterBy={setFilterBy} />
         <AddNote notes={notes} setNotes={setNotes} />
         {pinnedNotes.length > 0 && <Fragment>
@@ -75,6 +75,7 @@ export function NoteIndex() {
             onDeleteNote={onDeleteNote}
             onTogglePin={onTogglePin}
             onDuplicateNote={onDuplicateNote} />
-    </section>
+    </main>
 }
+
 

@@ -16,3 +16,7 @@ input[type=checkbox] {
     border: none;
     width: 80%;
 }
+
+.todos-list .done {
+    text-decoration: line-through;
+}

@@ -8,7 +8,6 @@ export function NoteImg({ info, handleChange }) {
             name="title"
             placeholder="Title"
             value={title}
-            onChange={handleChange}
-        />
+            onChange={handleChange}/>
     </section>
 }

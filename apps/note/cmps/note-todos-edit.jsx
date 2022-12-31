@@ -16,7 +16,6 @@ export function NoteTodosEdit({ note, handleChange }) {
     function onRemoveTodo(todoId) {
         noteService.removeTodo(note.id, todoId)
         setTodos(prevTodos => prevTodos.filter(todo => todo.id !== todoId))
-        // setNotes(prev=>([...prev]))
     }
 
     function handleChangeTodo(todoId, target) {

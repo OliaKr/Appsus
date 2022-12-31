@@ -12,53 +12,59 @@ import { EmailCounter } from "../cmps/mail-counter.jsx"
 export function MailIndex() {
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [emails, setEmails] = useState([])
-    const [isComposeMail, setComposeMail] = useState(false);
-    const [selectedEmail, setSelectedEmail] = useState(null)
+    const [isComposeMail, setComposeMail] = useState(false)
+    // const [selectedEmail, setSelectedEmail] = useState(null)
 
     useEffect(() => {
-        console.log('loading emails...');
+        console.log('loading emails...')
         loadEmails()
-
     }, [filterBy])
 
 
     function loadEmails() {
-        mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate))
+        mailService.query(filterBy)
+            .then(emails => setEmails(emails.filter(email => !email.isTrash)))
     }
 
     const filterMailByType = (type) => {
         switch (type) {
             case "inbox":
-                mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter((email) => email.from != mailService.getCurrentUser().fullname)));
-                break;
+                mailService.query(filterBy)
+                    .then(filteredEmails => setEmails(filteredEmails.filter(
+                        (email) => email.from !== mailService.getCurrentUser().fullname && !email.isTrash)))
+                break
             case "sent":
-                mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter(
-                    (email) => email.from === mailService.getCurrentUser().fullname)));
-                break;
+                mailService.query(filterBy)
+                    .then(filteredEmails => setEmails(filteredEmails.filter(
+                        email => email.from === mailService.getCurrentUser().fullname && !email.isTrash)))
+                break
             case "read":
-                mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter((email) => email.isRead)));
-                break;
+                mailService.query(filterBy)
+                    .then(filteredEmails => setEmails(filteredEmails.filter(email => email.isRead && !email.isTrash)))
+                break
             case "unread":
-                mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter((email) => !email.isRead)));
-                break;
+                mailService.query(filterBy)
+                    .then(filteredEmails => setEmails(filteredEmails.filter(email => !email.isRead && !email.isTrash)))
+                break
             case "trash":
+<<<<<<< HEAD
+                mailService.query(filterBy)
+                    .then(filteredEmails => setEmails(filteredEmails.filter(email => email.isTrash)))
+                break
+            case "star":
+                mailService.query(filterBy)
+                    .then(filteredEmails => setEmails(filteredEmails.filter(email => email.star)))
+                break
+=======
                 mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter((email) => email.isTrash)));
                 break;
 
             default:
                 console.log("field is kind of odd", field);
 
+>>>>>>> origin/main
         }
-
     }
-
-    // function onMoveToTrash(emails, emailId) {
-    //     emails.forEach((email) => {
-    //         if (email.id === emailId) email.isTrash = true
-    //         console.log('emails trashed', emails);
-    //     });
-    //     mailService.save(emails)
-    // }
 
     function onSetFilter(filterBy) {
         setFilterBy(filterBy)
@@ -66,32 +72,40 @@ export function MailIndex() {
 
     function onMoveToTrash(ev, emailId) {
         ev.stopPropagation()
-        mailService.get(emailId)
-            .then(email => {
-                email.isTrash = true
-                setEmails(prevemails => ([...prevemails]))
-                // console.log('removed')
-            })
-
-            .catch(err => {
-                console.log('Had error:', err)
-            })
+        const currEmail = emails.find(email => email.id === emailId)
+        if (currEmail.isTrash) {
+            mailService.remove(emailId)
+            setEmails(prevEmails => prevEmails.filter(email => emailId !== email.id))
+        } else {
+            currEmail.isTrash = true
+            mailService.save(currEmail)
+            setEmails(prevEmails => prevEmails.filter(email => !email.isTrash))
+        }
+        console.log('removed')
     }
 
-    return <div >
+
+    return <main className="mail-index">
         <MailSearch onSetFilter={onSetFilter} />
+        <button className="compose-btn" onClick={() => { setComposeMail(prev => !prev) }}>
+            <i class="fa-solid fa-pen"></i> Compose</button>
         {!isComposeMail && <div className="container">
             <MailFolderList filterFunction={filterMailByType} />
+<<<<<<< HEAD
+            {emails.length > 0 && < MailList emails={emails} onMoveToTrash={onMoveToTrash} />}
+            {!emails.length && <div>No mails to display</div>}
+=======
             < MailList emails={emails} onMoveToTrash={onMoveToTrash} />
             {/* <EmailCounter /> */}
             
             
 
+>>>>>>> origin/main
         </div>
         }
-        <button onClick={() => { setComposeMail(!isComposeMail) }}>Compose Mail</button>
-        {selectedEmail && <MailDetails />}
+        {/* {selectedEmail && <MailDetails />} */}
 
         {isComposeMail && <MailAdd closeComposeMail={() => { setComposeMail(false) }} />}
-    </div>
+    </main>
 }
+

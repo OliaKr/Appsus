@@ -1,7 +1,0 @@
-.note-todos .todos-list{
-    list-style-type: none;
-}
-
-.todos-list .done {
-    text-decoration: line-through;
-}

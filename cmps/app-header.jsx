@@ -17,7 +17,6 @@ export function AppHeader() {
         <button onClick={() => setIsMenuShown(prev => !prev)}><i className="fa-solid fa-bars"></i></button>
         {isMenuShown && <nav className="main-nav"
             onClick={() => setIsMenuShown(prev => !prev)}>
-            {/* <NavLink to="/">Home</NavLink> */}
             <NavLink to="/about"><i className="fa-solid fa-info"></i><h3>About</h3></NavLink>
             <NavLink to="/mail"><i className="fa-solid fa-envelope"></i><h3>Mail</h3></NavLink>
             <NavLink to="/note"><i className="fa-regular fa-note-sticky"></i><h3>Note</h3></NavLink>

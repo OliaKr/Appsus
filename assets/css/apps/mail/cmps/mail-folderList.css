@@ -1,29 +1,39 @@
 .mail-folder-list {
-    max-width: 20%;
-    padding: 10px;
-
-
-
-  }
-  
-  .mail-folder-list ul {
-    padding: 0;
-  
+  max-width: 20%;
+  padding: 0 10px;
 }
 
-  li {
-    list-style: none; /* remove the default bullet point */
-    font-size: 1.2em; /* increase the font size */
-    line-height: 1.5; /* increase the line height for easier reading */
-    padding: 0.5em 0; /* add some padding to the top and bottom of the element */
-    margin: 0.5em 0; /* add some margin to the top and bottom of the element */
-    border-bottom: 1px solid #ccc; /* add a border to the bottom of the element */
-    cursor: pointer; /* change the cursor to a pointer when the user hovers over the element */
+.mail-folder-list ul {
+  padding: 0;
+
+}
+
+.mail-folder-list ul li {
+  text-align: left;
+  list-style: none;
+  font-size: 1.2em;
+  line-height: 1.5;
+  padding: 0.5em 0;
+  margin: 0.5em 0;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+@media (max-width:540px) {
+  .mail-folder-list ul li {
+    display: flex;
+    flex-direction: column;
+    font-size: .75em;
+    padding: 0;
   }
-  
-  /* apply a specific style when the element is hovered over or active */
-  li:hover,
-  li:active {
-    background-color: #eee; /* change the background color */
-    color: #333; /* change the text color */
-  }
+}
+
+.mail-folder-list ul i {
+  margin-inline-end: 10px;
+}
+
+.mail-folder-list ul li:hover,
+.mail-folder-list ul li:active {
+  background-color: #eee;
+  color: #333;
+}

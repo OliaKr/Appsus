@@ -1,14 +1,35 @@
 .mail-index {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
+  background-color: #f6f8fc;
+  padding: 0 10px;
+  height: 90vh;
+}
+
+@media (max-width:540px) {
+  .mail-index {
+    padding: 0;
   }
-  
-  .container {
-    display: flex; /* use the flex layout to place the divs side by side */
-  }
-  
-  .container > div {
-    flex: 1; /* divide the container evenly among the divs */
-    margin: 0 0.5em; /* add some margin to the left and right of the divs */
-    background-color: #eee; /* add a background color for visual reference */
-    text-align: center; /* center the text within the divs */
-  }
+}
+
+.container {
+  display: flex;
+  background-color: #f6f8fc;
+}
+
+.container>.mail-list {
+  flex: 1;
+  margin: 0 0.5em;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+}
+
+.compose-btn {
+  background-color: #c2e7ff;
+  font-size: 1em;
+  padding: 1em;
+  border-radius: 1em;
+}
+
+.compose-btn:hover {
+  box-shadow: 0 1px 3px 0 rgb(60 64 67 / 30%), 0 4px 8px 3px rgb(60 64 67 / 15%);
+}

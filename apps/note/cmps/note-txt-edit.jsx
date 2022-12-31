@@ -1,6 +1,5 @@
 const { Fragment } = React
 
-
 export function NoteTxtEdit({ note, handleChange }) {
     const { txt, title } = note.info
 
