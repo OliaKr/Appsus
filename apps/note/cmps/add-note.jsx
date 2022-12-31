@@ -1,101 +1,68 @@
-const { useState, useEffect, Fragment } = React
+const { useState, Fragment } = React
 
 import { DynamicEdit } from "./dynamic-edit.jsx"
 
 import { noteService } from "../services/note.service.js"
 
+
 export function AddNote({ setNotes }) {
-    const [isExpanded, setIsExpanded] = useState(false)
-    const [newNote, setNewNote] = useState(null)
+    const [newNote, setNewNote] = useState(noteService.getEmptyNote())
 
 
     function onInputClick() {
-        if (!newNote) setNewNote(noteService.getEmptyNote())
-        setIsExpanded(true)
+        setNewNote(noteService.getEmptyNote())
     }
 
     function onCheckboxClick() {
         setNewNote(noteService.getEmptyTodosNote())
-        console.log(newNote)
-        setIsExpanded(true)
     }
 
     function onYoutubeClick() {
         setNewNote(noteService.getEmptyVideoNote())
-        console.log(newNote)
-        setIsExpanded(true)
     }
 
     function onImageClick() {
         setNewNote(noteService.getEmptyImgNote())
-        console.log(newNote)
-        setIsExpanded(true)
     }
 
-    function handelChange({ target }) {
-        let { value, name: field } = target
-        setNewNote(prevNote => {
-            const newInfo = { ...prevNote.info, [field]: value }
-            return { ...prevNote, info: newInfo }
-        })
+    function onSaveNote() {
+        noteService.save(newNote)
+        setNotes(prevNotes => ([...prevNotes, newNote]))
+        setNewNote(noteService.getEmptyNote())
     }
-
-    function onCloseNote(ev) {
-        console.log(ev.relatedTarget)
-        if (ev.relatedTarget) return
-        if (newNote.info.txt || newNote.info.url) {
-            noteService.post(newNote)
-                .then(note => {
-                    setNotes(prevNotes => [...prevNotes, note])
-                })
-        }
-        setIsExpanded(false)
-        setNewNote(null)
-    }
-
-    // function onCloseEdit(ev) {
-    //     console.log(ev.relatedTarget)
-    //     if (ev.relatedTarget) return
-    //     if (noteToEdit.info.txt || noteToEdit.info.url) {
-    //         console.log('noteToEdit', noteToEdit)
-    //         noteService.save(noteToEdit)
-    //         const currNote = notes.find(note => note.id === noteId)
-    //         currNote.info = { ...noteToEdit.info }
-    //         setNotes(prevNotes => ([...prevNotes]))
-    //     }
-    //     navigate('/note')
-    // }
 
     function handleChange({ target }) {
         let { value, name: field } = target
-        console.log('value, field', value, field)
         setNewNote(prevNote => {
-            value = field === 'url' ? noteService.getEmdeddedUrl(value) : value
-            console.log('prevNote', prevNote)
-            const newInfo = { ...prevNote.info, [field]: value }
-            return { ...prevNote, info: newInfo }
+            if (field === 'url') prevNote.info.url = noteService.getEmdeddedUrl(value)
+            else prevNote.info[field] = value
+            return { ...prevNote }
         })
     }
 
-    return <section className="add-note"
-        onBlur={onCloseNote}
-    >
-        {!isExpanded && <Fragment>
-            {/* <form> */}
-            <textarea className="no-border"
-                name="txt"
-                onClick={onInputClick}
-                placeholder="Take a note..."
-                value={newNote ? newNote.info.txt : ''}
-                onChange={handelChange} />
-            {/* </form> */}
-            <button onClick={onCheckboxClick}><i className="fa-regular fa-square-check"></i></button>
+    function saveImg(img) {
+        setNewNote(prevNote => {
+            prevNote.info.url = img.src
+            return { ...prevNote }
+        })
+    }
+
+    console.log('newNote', newNote)
+
+    return <Fragment>
+        <section className="add-note">
+            <button onClick={onInputClick}><i className="fa-regular fa-note-sticky"></i></button>
+            <button onClick={onCheckboxClick}><i className="fa-solid fa-list-check"></i></button>
             <button onClick={onYoutubeClick}><i className="fa-brands fa-youtube"></i></button>
             <button onClick={onImageClick}><i className="fa-regular fa-image"></i></button>
-        </Fragment>}
-        {isExpanded && <DynamicEdit note={newNote} handleChange={handleChange} />}
-
-
-    </section>
+        </section>
+        <section className="dynamic-edit">
+            <DynamicEdit
+                note={newNote}
+                handleChange={handleChange}
+                saveImg={saveImg} />
+            <button onClick={onSaveNote}><i class="fa-solid fa-floppy-disk"></i></button>
+        </section>
+    </Fragment>
 }
 

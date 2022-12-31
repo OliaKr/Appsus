@@ -8,7 +8,7 @@ export const utilService = {
     getMonthName,
     saveToStorage,
     loadFromStorage,
-    onImgInput,
+    loadImageFromInput,
 }
 
 function makeId(length = 6) {
@@ -71,10 +71,6 @@ function saveToStorage(key, value) {
 function loadFromStorage(key) {
     const data = localStorage.getItem(key)
     return (data) ? JSON.parse(data) : undefined
-}
-
-function onImgInput(ev) {
-    loadImageFromInput(ev,console.log)
 }
 
 // CallBack func will run on success load of the img

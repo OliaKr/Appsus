@@ -1,15 +1,14 @@
+const { Fragment } = React
+
 import { utilService } from "../../../services/util.service.js"
 
-export function NoteImgEdit({ note, handleChange }) {
-    const { url, title, txt } = note.info
+export function NoteImgEdit({ note, saveImg, handleChange }) {
+    const { title, txt } = note.info
 
-    return <section className="note-txt-edit">
-        <input type="file" class="file-input btn" name="url" 
-        // value={url}
-        onInput={utilService.onImgInput}
-        onchange={handleChange}></input>
-        {url && <img src={url} alt="" />}
-        <input className="no-border"
+    return <Fragment>
+        <input type="file" class="file-input btn" name="url"
+            onChange={(ev) => utilService.loadImageFromInput(ev, saveImg)}></input>
+        <textarea className="no-border"
             type="text"
             name="title"
             placeholder="Title"
@@ -20,5 +19,7 @@ export function NoteImgEdit({ note, handleChange }) {
             placeholder="Take a note..."
             value={txt}
             onChange={handleChange} />
-    </section>
+    </Fragment>
 }
+
+

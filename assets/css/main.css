@@ -34,9 +34,8 @@
 @import './apps/note/cmps/note-img.css';
 @import './apps/note/cmps/note-todos.css';
 @import './apps/note/cmps/note-video.css';
-@import './apps/note/cmps/note-edit.css';
+@import './apps/note/cmps/dynamic-edit.css';
 @import './apps/note/cmps/color-picker.css';
-@import './apps/note/cmps/screen.css';
 @import './apps/note/cmps/note-todos-edit.css';
 @import './apps/note/cmps/note-filter.css';
 
@@ -45,3 +44,6 @@
 @import './apps/mail/cmps/mail-preview.css';
 @import './apps/mail/cmps/mail-header.css';
 @import './apps/mail/cmps/mail-folderList.css';
+
+
+

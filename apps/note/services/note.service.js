@@ -19,7 +19,6 @@ export const noteService = {
     getEmdeddedUrl,
     getColors,
     getDefaultTodo,
-    saveTodo,
     removeTodo,
 }
 
@@ -27,29 +26,15 @@ function getDefaultTodo() {
     return { txt: '', doneAt: null, id: utilService.makeId() }
 }
 
-
-function saveTodo(noteId, todoToSave) {
-    const notes = utilService.loadFromStorage(NOTE_KEY)
-    const note = notes.find((note) => note.id === noteId)
-    console.log('note', note)
-    if (todoToSave.id) {
-        let currTodo = note.info.todos.find((todo) => todo.id === todoToSave.id)
-        currTodo = { ...todoToSave }
-    } else {
-        const todo = _createTodo(todoToSave)
-        note.info.todos.unshift(todo)
-    }
-    utilService.saveToStorage(NOTE_KEY, notes)
-    // return Promise.resolve(todo)
-}
-
 function removeTodo(noteId, todoId) {
     const notes = utilService.loadFromStorage(NOTE_KEY)
     let note = notes.find((note) => note.id === noteId)
     console.log('note', note)
     const newTodos = note.info.todos.filter((todo) => todo.id !== todoId)
-    note.info.todos = newTodos
-    utilService.saveToStorage(NOTE_KEY, notes)
+    note.info.todos = [...newTodos]
+    storageService.put(NOTE_KEY, note)
+    // utilService.saveToStorage(NOTE_KEY, notes)
+
     return Promise.resolve()
 }
 
@@ -62,7 +47,6 @@ function _createTodo(todoToSave) {
 
 function getEmptyNote() {
     return {
-        id: utilService.makeId(),
         type: "note-txt",
         isPinned: false,
         // createdAt: Date.now(),
@@ -78,10 +62,8 @@ function getEmptyNote() {
 
 function getEmptyTodosNote() {
     return {
-        id: utilService.makeId(),
         type: "note-todos",
         isPinned: false,
-        // createdAt: Date.now(),
         info: {
             todos: [],
             title: ''
@@ -94,7 +76,6 @@ function getEmptyTodosNote() {
 
 function getEmptyVideoNote() {
     return {
-        id: utilService.makeId(),
         type: "note-video",
         isPinned: false,
         info: {
@@ -110,7 +91,6 @@ function getEmptyVideoNote() {
 
 function getEmptyImgNote() {
     return {
-        id: utilService.makeId(),
         type: "note-img",
         isPinned: false,
         info: {
@@ -180,7 +160,7 @@ function remove(noteId) {
 }
 
 function post(note) {
-    note.createAt = Date.now()
+    // note.createAt = Date.now()
     return storageService.post(NOTE_KEY, note)
 }
 

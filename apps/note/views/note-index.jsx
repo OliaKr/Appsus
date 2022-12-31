@@ -4,8 +4,6 @@ const { useNavigate, useParams, Link } = ReactRouterDOM
 
 import { AddNote } from "../cmps/add-note.jsx"
 import { NoteList } from "../cmps/note-list.jsx"
-import { NoteEdit } from "../cmps/note-edit.jsx"
-import { Screen } from "../cmps/screen.jsx"
 import { NoteFilter } from "../cmps/note-filter.jsx"
 
 import { noteService } from "../services/note.service.js"
@@ -27,6 +25,14 @@ export function NoteIndex() {
             })
     }
 
+    function changeColor(color, noteId) {
+        const currNote = notes.find(note => note.id === noteId)
+        currNote.style.backgroundColor = color
+        console.log('currNote', currNote)
+        noteService.save(currNote)
+        setNotes(prevNotes => ([...prevNotes]))
+    }
+
     function onDeleteNote(ev, noteId) {
         ev.stopPropagation()
         noteService.remove(noteId)
@@ -45,9 +51,7 @@ export function NoteIndex() {
     function onDuplicateNote(ev, noteId) {
         ev.stopPropagation()
         const currNote = notes.find(note => note.id === noteId)
-        console.log('currNote', currNote)
         const duplicateNote = { ...currNote, id: null }
-        console.log('duplicateNote', duplicateNote)
         noteService.save(duplicateNote)
             .then(note => setNotes(prevNotes => ([...prevNotes, note])))
     }
@@ -60,24 +64,17 @@ export function NoteIndex() {
         {pinnedNotes.length > 0 && <Fragment>
             <h3>Pinned Notes</h3>
             <NoteList notes={pinnedNotes}
-                setNotes={setNotes}
+                changeColor={changeColor}
                 onDeleteNote={onDeleteNote}
                 onTogglePin={onTogglePin}
                 onDuplicateNote={onDuplicateNote} />
             <h3>Notes</h3>
         </Fragment>}
         <NoteList notes={notes.filter(note => !note.isPinned)}
-            setNotes={setNotes}
+            changeColor={changeColor}
             onDeleteNote={onDeleteNote}
             onTogglePin={onTogglePin}
             onDuplicateNote={onDuplicateNote} />
-        {noteId && <NoteEdit notes={notes}
-            setNotes={setNotes}
-            noteId={noteId}
-            onDeleteNote={onDeleteNote}
-            onTogglePin={onTogglePin}
-            onDuplicateNote={onDuplicateNote} />}
-        {noteId && <Screen />}
     </section>
 }
 
