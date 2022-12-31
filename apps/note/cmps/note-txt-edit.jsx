@@ -1,8 +1,10 @@
+const { Fragment } = React
 
 
 export function NoteTxtEdit({ note, handleChange }) {
-    const {txt,title} = note.info
-    return <section className="note-txt-edit">
+    const { txt, title } = note.info
+
+    return <Fragment>
         <input className="no-border"
             type="text"
             name="title"
@@ -14,5 +16,5 @@ export function NoteTxtEdit({ note, handleChange }) {
             placeholder="Take a note..."
             value={txt}
             onChange={handleChange} />
-    </section>
+    </Fragment>
 }

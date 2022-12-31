@@ -27,12 +27,15 @@ img {
 }
 
 textarea {
+    width: 100%;
+    border: none;
     resize: none;
     font-family: inherit;
 }
 
 input {
     border: none;
+    font-family: inherit;
 }
 
 :focus-visible {

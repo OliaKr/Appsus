@@ -1,7 +1,3 @@
-const { useState, useEffect } = React
-
-import { noteService } from "../services/note.service"
-
 
 export function NoteFilter({ setFilterBy }) {
 

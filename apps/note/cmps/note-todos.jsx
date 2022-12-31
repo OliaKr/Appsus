@@ -1,17 +1,15 @@
-import { NoteTitle } from "./note-title.jsx"
+import { NoteTodosList } from "./note-todos-list.jsx"
 
-export function NoteTodos({ info }) {
+export function NoteTodos({ info, handleChange }) {
     const { label, todos } = info
-    // console.log(info)
     return <section className="note-todos">
-        <NoteTitle title={label} />
-        <ul className="todos-list">
-            {todos.map(todo => <li key={todo.id}
-                className={todo.doneAt ? 'done' : ''}>
-                {todo.txt}
-            </li>)}
-        </ul>
-
+        <textarea className="no-border"
+            type="text"
+            name="label"
+            placeholder="Title"
+            value={label}
+            onChange={handleChange} />
+        <NoteTodosList todos={todos} />
     </section>
 }
 

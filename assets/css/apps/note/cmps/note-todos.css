@@ -1,9 +1,5 @@
-.note-todos ul{
-
-}
-
 .note-todos .todos-list{
-    list-style-type: square;
+    list-style-type: none;
 }
 
 .todos-list .done {

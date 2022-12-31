@@ -1,0 +1,40 @@
+.dynamic-edit {
+    width: 340px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: .5em;
+    border: solid 1.1px var(--border-color);
+    min-height: 150px;
+    background-color: white;
+    break-inside: avoid;
+
+    padding: .75em 1em;
+
+    margin-bottom: 1em;
+}
+
+.dynamic-edit textarea,
+.dynamic-edit input {
+    width: 100%;
+}
+
+.dynamic-edit :focus-visible {
+    outline: none;
+}
+
+.dynamic-edit .btns-container {
+    display: inline;
+}
+.dynamic-edit button {
+    background-color: inherit;
+    border: none;
+    font-size: 1.25em;
+}
+
+.dynamic-edit .close-btn:hover {
+    background-color: #00000010;
+    border-radius: 5px;
+}
+

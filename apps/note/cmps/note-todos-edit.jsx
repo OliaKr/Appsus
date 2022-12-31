@@ -1,40 +1,28 @@
-const { useState, useEffect } = React
+const { useState, useEffect, Fragment } = React
 import { noteService } from "../services/note.service.js"
 import { NoteTodosList } from "./note-todos-list.jsx"
 
-export function NoteTodosEdit({ note, setNotes, handleChange }) {
+export function NoteTodosEdit({ note, handleChange }) {
     const [todos, setTodos] = useState(note.info.todos)
     const { title } = note.info
 
     useEffect(() => {
-        if (!todos.length) {
-            setTodos([noteService.getDefaultTodo()])
+        if (!todos.length || !todos[todos.length - 1].txt) {
+            console.log('render another line')
+            setTodos([...todos, noteService.getDefaultTodo()])
         }
     }, [])
 
     function onRemoveTodo(todoId) {
         noteService.removeTodo(note.id, todoId)
         setTodos(prevTodos => prevTodos.filter(todo => todo.id !== todoId))
-    }
-
-    function onSaveTodo(todoToSave) {
-        const noteId = note.id
-        const currTodo = todos.find(todo => todo.id === todoToSave.id)
-        noteService.saveTodo(noteId, todoToSave)
-        setTodos(prevTodos => ([...prevTodos]))
-        const newInfo = { ...note.info, todos }
-        noteService.save({ ...note, info: newInfo })
-        setNotes(prevNotes => {
-            const idx = prevNotes.findIndex(note => note.id === noteId)
-            prevNotes.splice(idx, 1, note)
-            return ([...prevNotes])
-        })
+        // setNotes(prev=>([...prev]))
     }
 
     function handleChangeTodo(todoId, target) {
-        let { value, name: field } = target
+        let { value } = target
         let currTodo = todos.find(todo => todo.id === todoId)
-        currTodo[field] = value
+        currTodo.txt = value
         setTodos(prevTodos => ([...prevTodos]))
         noteService.save(note)
     }
@@ -47,9 +35,8 @@ export function NoteTodosEdit({ note, setNotes, handleChange }) {
         noteService.save(note)
     }
 
-
-    return <section className="note-todos-edit">
-        <input className="no-border"
+    return <Fragment>
+        <textarea className="no-border"
             type="text"
             name="title"
             placeholder="Title"
@@ -58,10 +45,10 @@ export function NoteTodosEdit({ note, setNotes, handleChange }) {
         <NoteTodosList
             todos={todos}
             onRemoveTodo={onRemoveTodo}
-            onSaveTodo={onSaveTodo}
             handleChangeTodo={handleChangeTodo}
             handleCheckBoxChange={handleCheckBoxChange} />
-    </section>
+    </Fragment>
 }
+
 
 

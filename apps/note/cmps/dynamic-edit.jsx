@@ -4,7 +4,7 @@ import { NoteTxtEdit } from "./note-txt-edit.jsx"
 import { NoteVideoEdit } from "./note-video-edit.jsx"
 
 
-export function DynamicEdit({ note, setNotes, handleChange }) {
+export function DynamicEdit({ note, saveImg, handleChange }) {
 
     switch (note.type) {
         case 'note-txt':
@@ -13,6 +13,7 @@ export function DynamicEdit({ note, setNotes, handleChange }) {
 
         case 'note-img':
             return <NoteImgEdit note={note}
+                saveImg={saveImg}
                 handleChange={handleChange} />
 
         case 'note-video':
@@ -21,7 +22,6 @@ export function DynamicEdit({ note, setNotes, handleChange }) {
 
         case 'note-todos':
             return <NoteTodosEdit note={note}
-                setNotes={setNotes}
                 handleChange={handleChange} />
     }
 }
