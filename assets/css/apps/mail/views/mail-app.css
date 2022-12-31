@@ -2,3 +2,13 @@
     flex-wrap: wrap;
   }
   
+  .container {
+    display: flex; /* use the flex layout to place the divs side by side */
+  }
+  
+  .container > div {
+    flex: 1; /* divide the container evenly among the divs */
+    margin: 0 0.5em; /* add some margin to the left and right of the divs */
+    background-color: #eee; /* add a background color for visual reference */
+    text-align: center; /* center the text within the divs */
+  }

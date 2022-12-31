@@ -6,6 +6,7 @@ import { About } from "./views/about.jsx"
 import { Home } from "./views/home.jsx"
 import { MailIndex } from "./apps/mail/views/mail-index.jsx"
 import { NoteIndex } from "./apps/note/views/note-index.jsx"
+import { Mailpreview } from "./apps/mail/cmps/mail-preview.jsx"
 
 
 
@@ -17,6 +18,7 @@ export function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/mail" element={<MailIndex />} />
+                <Route path="/mail/:emailId" element={<Mailpreview />} />
                 {/* <Route path="mail/:emailId" element={<MailIndex/>}/> */}
                 <Route path="/note" element={<NoteIndex />} />
                 <Route path="/note/:noteId" element={<NoteIndex />} />

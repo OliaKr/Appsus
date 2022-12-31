@@ -1,5 +1,22 @@
 .mail-folder-list {
-    width: 10%;
+    max-width: 20%;
     padding: 10px;
+
   }
   
+  li {
+    list-style: none; /* remove the default bullet point */
+    font-size: 1.2em; /* increase the font size */
+    line-height: 1.5; /* increase the line height for easier reading */
+    padding: 0.5em 0; /* add some padding to the top and bottom of the element */
+    margin: 0.5em 0; /* add some margin to the top and bottom of the element */
+    border-bottom: 1px solid #ccc; /* add a border to the bottom of the element */
+    cursor: pointer; /* change the cursor to a pointer when the user hovers over the element */
+  }
+  
+  /* apply a specific style when the element is hovered over or active */
+  li:hover,
+  li:active {
+    background-color: #eee; /* change the background color */
+    color: #333; /* change the text color */
+  }

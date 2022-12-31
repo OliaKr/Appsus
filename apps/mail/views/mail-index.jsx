@@ -3,7 +3,7 @@ const { useState, useEffect } = React
 import { MailList } from "../cmps/mail-list.jsx"
 import { mailService } from '../services/mail.service.js'
 import { MailSearch } from "../cmps/mail-search.jsx"
-import { MailDetails } from "../cmps/mail.-details.jsx"
+import { MailDetails } from "../cmps/mail-details.jsx"
 import { MailFolderList } from "../cmps/mail-folderList.jsx"
 import { MailAdd } from "../cmps/mail-add.jsx"
 
@@ -11,6 +11,7 @@ import { MailAdd } from "../cmps/mail-add.jsx"
 export function MailIndex() {
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter)
     const [emails, setEmails] = useState([])
+    const [isComposeMail,setComposeMail] = useState(false);
     const [selectedEmail, setSelectedEmail] = useState(null)
 
     useEffect(() => {
@@ -24,7 +25,26 @@ export function MailIndex() {
         mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate))
     }
 
-    console.log('emails', emails);
+    const filterMailByType = (type) => {
+        switch (type){
+            case "inbox":
+                mailService.query(filterBy).then(emailsToUpdate =>  setEmails(emailsToUpdate.filter((email) => email.from != mailService.getCurrentUser().fullname)));
+                break;
+            case "sent":
+                mailService.query(filterBy).then(emailsToUpdate =>  setEmails(emailsToUpdate.filter(
+                    (email) => email.from === mailService.getCurrentUser().fullname)));
+                break; 
+            case "read":
+                mailService.query(filterBy).then(emailsToUpdate =>  setEmails(emailsToUpdate.filter((email) => email.isRead)));
+                break;
+            case "unread":
+                mailService.query(filterBy).then(emailsToUpdate =>  setEmails(emailsToUpdate.filter((email) => !email.isRead)));
+                break;
+                
+
+        }
+
+    }
 
     // function onMoveToTrash(emails, emailId) {
     //     emails.forEach((email) => {
@@ -51,28 +71,18 @@ export function MailIndex() {
                 console.log('Had error:', err)
             })
     }
-
-
-    console.log('filterBy from mailIndex', filterBy);
-    console.log('emails are emails', emails);
-    return <div className="mail-index flex">
-
-
+ 
+    return <div >
         <MailSearch onSetFilter={onSetFilter} />
-        <MailFolderList />
-        < MailList emails={emails}
-            onMoveToTrash={onMoveToTrash}
-        />
-        {selectedEmail &&<MailDetails />}
-        {/* {emailId && < MailDetails loadEmails={loadEmails} emailId = {emailId}
+        {!isComposeMail && <div className="container">
+            <MailFolderList filterFunction={filterMailByType} />
+            < MailList emails={emails} onMoveToTrash={onMoveToTrash}/>
+            
+            </div>
+        }
+        <button  onClick={()=>{setComposeMail(!isComposeMail)}}>Compose Mail</button>
+        {selectedEmail &&<MailDetails  />}
         
-        />} */}
-
-        <MailAdd/>
-
-
-
-
+        {isComposeMail && <MailAdd closeComposeMail={()=>{setComposeMail(false)} }/>}
     </div>
 }
-

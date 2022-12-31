@@ -1,21 +1,22 @@
 
-export function MailFolderList() {
+export function MailFolderList({filterFunction}) {
 
-    return <div className="mail-folder-list-column">
+    return <div className="mail-folder-list">
 
         <ul>
-            <li>
+            <li onClick={()=>filterFunction("inbox")} >
                 Inbox
             </li>
-            <li>
+            <li onClick={()=>filterFunction("read")}>  
+           
                 Read
             </li>
 
-            <li>
+            <li onClick={()=>filterFunction("unread")}>
                 Unerad
             </li>
 
-            <li>
+            <li onClick={()=>filterFunction("sent")}>
                 Sent
             </li>
 
