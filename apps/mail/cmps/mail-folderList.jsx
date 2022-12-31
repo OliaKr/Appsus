@@ -9,24 +9,8 @@ export function MailFolderList({ filterFunction }) {
                 Inbox
             </li>
 
-<<<<<<< HEAD
             <li onClick={() => filterFunction("star")}>
                 <i className="fa-regular fa-star"></i>
-=======
-            <li onClick={()=>filterFunction("unread")}>
-                Unerad
-            </li>
-
-            <li onClick={()=>filterFunction("sent")}>
-                Sent
-            </li>
-
-            <li onClick={()=>filterFunction("trash")}>
-                Trash
-            </li>
-
-            <li >
->>>>>>> origin/main
                 Starred
             </li>
 
@@ -55,3 +39,4 @@ export function MailFolderList({ filterFunction }) {
     </div>
 
 }
+
