@@ -24,7 +24,7 @@ export function MailFolderList({filterFunction}) {
                 Trash
             </li>
 
-            <li>
+            <li >
                 Starred
             </li>
 

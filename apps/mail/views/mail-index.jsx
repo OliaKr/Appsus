@@ -6,6 +6,7 @@ import { MailSearch } from "../cmps/mail-search.jsx"
 import { MailDetails } from "../cmps/mail-details.jsx"
 import { MailFolderList } from "../cmps/mail-folderList.jsx"
 import { MailAdd } from "../cmps/mail-add.jsx"
+import { EmailCounter } from "../cmps/mail-counter.jsx"
 
 
 export function MailIndex() {
@@ -44,8 +45,8 @@ export function MailIndex() {
                 mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter((email) => email.isTrash)));
                 break;
 
-
-
+            default:
+                console.log("field is kind of odd", field);
 
         }
 
@@ -82,6 +83,9 @@ export function MailIndex() {
         {!isComposeMail && <div className="container">
             <MailFolderList filterFunction={filterMailByType} />
             < MailList emails={emails} onMoveToTrash={onMoveToTrash} />
+            {/* <EmailCounter /> */}
+            
+            
 
         </div>
         }
