@@ -18,9 +18,14 @@ export function Mailpreview({ email, togglePreview, onMoveToTrash }) {
         <div className='from-preview'><a href={`./index.html#/mail/${email.id}`}> {email.from}</a></div>
         <div className='subject-preview'>{email.subject}</div>
         <div className='text-preview'>{email.body}</div>
-        <button className='delete' onClick={() => onMoveToTrash(email.id)}>
+       
+        <button className='delete' onClick={(ev) => onMoveToTrash(ev, email.id)}>
           move to trash
         </button>
+
+        {/* <button className='delete' onClick={() => onMoveToTrash(email.id)}>
+          move to trash
+        </button> */}
       </div>}
       {emailId && <MailDetails emailId={emailId}></MailDetails>}
     </div>

@@ -9,9 +9,9 @@ import { MailAdd } from "../cmps/mail-add.jsx"
 
 
 export function MailIndex() {
-    const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter)
+    const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [emails, setEmails] = useState([])
-    const [isComposeMail,setComposeMail] = useState(false);
+    const [isComposeMail, setComposeMail] = useState(false);
     const [selectedEmail, setSelectedEmail] = useState(null)
 
     useEffect(() => {
@@ -26,21 +26,26 @@ export function MailIndex() {
     }
 
     const filterMailByType = (type) => {
-        switch (type){
+        switch (type) {
             case "inbox":
-                mailService.query(filterBy).then(emailsToUpdate =>  setEmails(emailsToUpdate.filter((email) => email.from != mailService.getCurrentUser().fullname)));
+                mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter((email) => email.from != mailService.getCurrentUser().fullname)));
                 break;
             case "sent":
-                mailService.query(filterBy).then(emailsToUpdate =>  setEmails(emailsToUpdate.filter(
+                mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter(
                     (email) => email.from === mailService.getCurrentUser().fullname)));
-                break; 
+                break;
             case "read":
-                mailService.query(filterBy).then(emailsToUpdate =>  setEmails(emailsToUpdate.filter((email) => email.isRead)));
+                mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter((email) => email.isRead)));
                 break;
             case "unread":
-                mailService.query(filterBy).then(emailsToUpdate =>  setEmails(emailsToUpdate.filter((email) => !email.isRead)));
+                mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter((email) => !email.isRead)));
                 break;
-                
+            case "trash":
+                mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter((email) => email.isTrash)));
+                break;
+
+
+
 
         }
 
@@ -58,12 +63,12 @@ export function MailIndex() {
         setFilterBy(filterBy)
     }
 
-    function onMoveToTrash(emails, emailId) {
-        console.log('Removing', emails)
-        mailService.remove(emailId)
-            .then(() => {
-                const updateEmails = emails.filter(email => email.id !== emailId)
-                setEmails(updateEmails)
+    function onMoveToTrash(ev, emailId) {
+        ev.stopPropagation()
+        mailService.get(emailId)
+            .then(email => {
+                email.isTrash = true
+                setEmails(prevemails => ([...prevemails]))
                 // console.log('removed')
             })
 
@@ -71,18 +76,18 @@ export function MailIndex() {
                 console.log('Had error:', err)
             })
     }
- 
+
     return <div >
         <MailSearch onSetFilter={onSetFilter} />
         {!isComposeMail && <div className="container">
             <MailFolderList filterFunction={filterMailByType} />
-            < MailList emails={emails} onMoveToTrash={onMoveToTrash}/>
-            
-            </div>
+            < MailList emails={emails} onMoveToTrash={onMoveToTrash} />
+
+        </div>
         }
-        <button  onClick={()=>{setComposeMail(!isComposeMail)}}>Compose Mail</button>
-        {selectedEmail &&<MailDetails  />}
-        
-        {isComposeMail && <MailAdd closeComposeMail={()=>{setComposeMail(false)} }/>}
+        <button onClick={() => { setComposeMail(!isComposeMail) }}>Compose Mail</button>
+        {selectedEmail && <MailDetails />}
+
+        {isComposeMail && <MailAdd closeComposeMail={() => { setComposeMail(false) }} />}
     </div>
 }

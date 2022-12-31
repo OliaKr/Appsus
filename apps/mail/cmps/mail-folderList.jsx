@@ -20,7 +20,7 @@ export function MailFolderList({filterFunction}) {
                 Sent
             </li>
 
-            <li>
+            <li onClick={()=>filterFunction("trash")}>
                 Trash
             </li>
 

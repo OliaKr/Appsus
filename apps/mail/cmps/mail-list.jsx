@@ -30,7 +30,7 @@ export function MailList({emails, onMoveToTrash}) {
                 key={email.id}
                 email={email}
                 togglePreview={() => togglePreview(email.id)}
-                onMoveToTrash={() => onMoveToTrash(emails, email.id)}
+                onMoveToTrash={onMoveToTrash}
                 
               />
             );
