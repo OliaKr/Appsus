@@ -1,9 +1,8 @@
 .mail-header {
-    background-color: rgb(217, 238, 244);
+    background-color:#f6f8fc;
+    fill: #000000;
     padding: 1em;
     width: 100%;
-   
-
 }
 
 .mail-header form {
