@@ -6,6 +6,7 @@
   width: 100%;
   position: relative;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .mail-preview>* {
@@ -18,6 +19,7 @@
 
 .email-row {
   display: flex;
+  font-family: Roboto, Arial, sans-serif;
 }
 
 .from-preview {

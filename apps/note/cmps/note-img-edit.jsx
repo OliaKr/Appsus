@@ -6,7 +6,7 @@ export function NoteImgEdit({ note, saveImg, handleChange }) {
     const { title, txt } = note.info
 
     return <Fragment>
-        <input type="file" class="file-input btn" name="url"
+        <input type="file" className="file-input btn" name="url"
             onChange={(ev) => utilService.loadImageFromInput(ev, saveImg)}></input>
         <textarea className="no-border"
             type="text"

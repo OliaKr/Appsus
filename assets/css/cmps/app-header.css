@@ -73,3 +73,15 @@ nav a.active {
 .app-header .main-nav article {
     color: rgb(182, 182, 182);
 }
+
+.logo-img {
+    object-fit: cover;
+    height: 10vh;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}

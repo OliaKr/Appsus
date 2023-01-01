@@ -1,3 +1,5 @@
+import { noteService } from "../apps/note/services/note.service.js"
+
 function createEventEmitter() {
     const listenersMap = {}
     // Trick for DEBUG
@@ -29,6 +31,11 @@ export function showErrorMsg(txt) {
     showUserMsg({ txt, type: 'error' })
 }
 
+eventBusService.on("saveNote",(email)=>{
+    console.log("saving note",email.subject);
+    let savedNote = {type:"note-txt",style:{backgroundColor: '#a7ffeb'}, info:{txt:email.body,title:email.subject}}
+    noteService.save(savedNote).then(()=>alert("success"));
+})
 
 // Service Testing:
 // eventBus.on('muk', (data)=>{

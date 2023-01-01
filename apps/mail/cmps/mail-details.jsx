@@ -3,6 +3,7 @@ const { useState, useEffect } = React
 const { useNavigate, useParams, Link } = ReactRouterDOM
 
 import { mailService } from "../services/mail.service.js"
+import { eventBusService } from "../../../services/event-bus.service.js"
 
 export function MailDetails({emailId}) {
 
@@ -18,14 +19,30 @@ export function MailDetails({emailId}) {
     
     }
 
-    return <div className="mail-details">
+    return (
+        <div className="mail-details">
+            <div className="mail-details-actions">
+                <button onClick={() => eventBusService.emit("saveNote",email)}>Save as a note</button>
+                <Link to={"/mail"}><button>Go Back</button></Link>
+        
 
-        { email &&  <div>
-        <h3>Subject : {email.subject}</h3> 
-        <h4>From: {email.from}</h4>
-            <p> {email.body} </p> 
-        </div>}
-
-    </div>
+            </div>
+                <div className={"mail-content"}>
+                    <div class="mail-details-header">
+                    <h3>Subject: {email.subject}</h3>
+                    <h4>From: {email.from}</h4>
+                    </div>
+                    <div class="mail-details-body">
+                        {email.body}
+                    </div>
+                </div>
+    
+        </div>
+    )
+    
+  
+  
+  
+  
 }
 

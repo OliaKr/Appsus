@@ -3,15 +3,16 @@ const { useState, useEffect } = React
 import { MailList } from "../cmps/mail-list.jsx"
 import { mailService } from '../services/mail.service.js'
 import { MailSearch } from "../cmps/mail-search.jsx"
-import { MailDetails } from "../cmps/mail-details.jsx"
 import { MailFolderList } from "../cmps/mail-folderList.jsx"
 import { MailAdd } from "../cmps/mail-add.jsx"
-import { EmailCounter } from "../cmps/mail-counter.jsx"
+import { ProgressCount } from "../cmps/progress-counter.jsx"
 
 
 export function MailIndex() {
-    const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
+    const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter());
+    const [currentTab,setTab] = useState("inbox");
     const [emails, setEmails] = useState([])
+    const [allEmails, setAllEmails] = useState([])
     const [isComposeMail, setComposeMail] = useState(false)
     // const [selectedEmail, setSelectedEmail] = useState(null)
 
@@ -22,40 +23,37 @@ export function MailIndex() {
 
 
     function loadEmails() {
-        mailService.query(filterBy)
-            .then(emails => setEmails(emails.filter(email => !email.isTrash)))
+        filterMailByType(currentTab);
     }
 
     const filterMailByType = (type) => {
+        setTab(type);
         switch (type) {
-            case "inbox":
-                mailService.query(filterBy)
-                    .then(filteredEmails => setEmails(filteredEmails.filter(
-                        (email) => email.from !== mailService.getCurrentUser().fullname && !email.isTrash)))
-                break
-            case "sent":
-                mailService.query(filterBy)
-                    .then(filteredEmails => setEmails(filteredEmails.filter(
-                        email => email.from === mailService.getCurrentUser().fullname && !email.isTrash)))
-                break
+            
+            case "sent":                
+                mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter(
+                    (email) => email.from === mailService.getCurrentUser().fullname)));
+                break;
             case "read":
-                mailService.query(filterBy)
-                    .then(filteredEmails => setEmails(filteredEmails.filter(email => email.isRead && !email.isTrash)))
-                break
+                mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter((email) => email.isRead && !email.isTrash )));
+                break;
             case "unread":
-                mailService.query(filterBy)
-                    .then(filteredEmails => setEmails(filteredEmails.filter(email => !email.isRead && !email.isTrash)))
-                break
+                mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter((email) => !email.isRead && !email.isTrash)));
+                break;
             case "trash":
-                mailService.query(filterBy)
-                    .then(filteredEmails => setEmails(filteredEmails.filter(email => email.isTrash)))
-                break
+                mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter((email) => email.isTrash)));
+                break;
             case "star":
                 mailService.query(filterBy)
                     .then(filteredEmails => setEmails(filteredEmails.filter(email => email.star)))
-                break
+            default:            
+            mailService.query(filterBy).then(emailsToUpdate => setEmails(emailsToUpdate.filter(
+                (email) => email.from != mailService.getCurrentUser().fullname  && !email.isTrash )));
+                break;
+
         }
     }
+
 
     function onSetFilter(filterBy) {
         setFilterBy(filterBy)
@@ -75,19 +73,33 @@ export function MailIndex() {
         console.log('removed')
     }
 
+    
+    function getReadPrecentage(){
+        // mailService.query().then(emails=> emails.filter((emails=>emails.isRead)))
+        mailService.query().then((mails) => {
+            setAllEmails(mails) 
+        } )
+    
+        let readMails = allEmails.filter((email)=> email.isRead);
+        return Math.floor(100 * readMails.length/allEmails.length);
+        
+    }
+
 
     return <main className="mail-index">
         <MailSearch onSetFilter={onSetFilter} />
         <button className="compose-btn" onClick={() => { setComposeMail(prev => !prev) }}>
-            <i class="fa-solid fa-pen"></i> Compose</button>
+            <i className="fa-solid fa-pen"></i> Compose</button>
         {!isComposeMail && <div className="container">
             <MailFolderList filterFunction={filterMailByType} />
             {emails.length > 0 && < MailList emails={emails} onMoveToTrash={onMoveToTrash} />}
             {!emails.length && <div>No mails to display</div>}
         </div>
         }
-        {/* {selectedEmail && <MailDetails />} */}
+        <ProgressCount percentage={getReadPrecentage()}></ProgressCount>
 
+        {/* {selectedEmail && <MailDetails />} */}
+        
         {isComposeMail && <MailAdd closeComposeMail={() => { setComposeMail(false) }} />}
     </main>
 }

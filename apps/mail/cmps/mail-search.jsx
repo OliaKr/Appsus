@@ -19,7 +19,7 @@ export function MailSearch({ onSetFilter }) {
     return <div className="mail-header" >
 
         <form onSubmit={onSubmitFilter}>
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button><i className="fa-solid fa-magnifying-glass"></i></button>
             <input type="text"
                 id="bySearch"
                 name="txt"

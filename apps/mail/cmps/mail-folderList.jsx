@@ -8,12 +8,7 @@ export function MailFolderList({ filterFunction }) {
                 <i className="fa-solid fa-inbox"></i>
                 Inbox
             </li>
-
-            <li onClick={() => filterFunction("star")}>
-                <i className="fa-regular fa-star"></i>
-                Starred
-            </li>
-
+            
             <li onClick={() => filterFunction("read")}>
                 <i className="fa-regular fa-bookmark"></i>
                 Read
@@ -33,6 +28,11 @@ export function MailFolderList({ filterFunction }) {
                 <i className="fa-solid fa-trash-can"></i>
                 Trash
             </li>
+            <li onClick={() => filterFunction("star")}>
+                <i className="fa-regular fa-star"></i>
+                Starred
+            </li>
+            
 
 
         </ul>

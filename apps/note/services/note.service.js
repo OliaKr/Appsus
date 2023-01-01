@@ -135,6 +135,7 @@ function query(filterBy = getDefaultFilter()) {
             if (filterBy.type) {
                 notes = notes.filter(note => note.type === filterBy.type)
             }
+            
             return notes
         })
 }

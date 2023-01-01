@@ -7,7 +7,7 @@ export function AppHeader() {
 
     return <header className="app-header">
         <Link to="/">
-            <h3>LOGO!</h3>
+           <div className="logo"><img className="logo-img"src="assets/img/logo1.png" alt="" /></div> 
         </Link>
         <form>
             <span><i className="fa-solid fa-magnifying-glass"></i></span>
